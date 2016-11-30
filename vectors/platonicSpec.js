@@ -76,25 +76,25 @@ describe( "vectors and matrices", function() {
 	    expect(u.getZ()).toEqual(uz);
 	}); // check accessors
 
-	/***
+
 	it( "check addition", function() {
 	    var sum = u.add(v);
 	    expect(sum.getX()).toEqual(ux + vx);
 	    expect(sum.getY()).toEqual(uy + vy);
 	    expect(sum.getZ()).toEqual(uz + vz);
 	}); // check addtion
-	*/
-	
-	/***
+
+
+
 	it( "check subtraction", function() {
 	    var difference = u.subtract(v);
 	    expect(difference.getX()).toEqual(ux - vx);
 	    expect(difference.getY()).toEqual(uy - vy);
 	    expect(difference.getZ()).toEqual(uz - vz);
 	}); //  check subtraction
-	*/
-	
-	/***
+
+
+
 	it( "check scaling", function() {
 	    var scaleFactor = 10;
 	    var scaledVector = u.scale( scaleFactor, scaleFactor );
@@ -102,22 +102,22 @@ describe( "vectors and matrices", function() {
 	    expect(scaledVector.getY()).toEqual( scaleFactor * uy );
 	    expect(scaledVector.getZ()).toEqual( scaleFactor * uz );
 	}); // check scaling
-	*/
-	
-	/***
+
+
+
 	it( "check dot product", function() {
 	    expect(u.dot(v)).toEqual( ux * vx + uy * vy + uz * vz );
 	}); //  check dot product
-	*/
-	
-	/***
+
+
+
 	it( "check magnitude", function() {
 	    expect(u.magnitude()).toBeCloseTo( umag, 3 );
 	    expect(v.magnitude()).toBeCloseTo( vmag, 11 );
 	}); // check magnitude
-	*/
-	
-	/***
+
+
+
 	it( "check normalize", function() {
 	    var nu = u.normalize();
 	    expect(nu.getX()).toBeCloseTo( 1.0/3.0 );
@@ -128,21 +128,21 @@ describe( "vectors and matrices", function() {
 	    expect(nv.getY()).toBeCloseTo( 6.0/11.0 );
 	    expect(nv.getZ()).toBeCloseTo( 7.0/11.0 );
 	});
-	*/
-	
-	/***
+
+
+
 	it( "check cross product", function() {
 	    var crossProduct = u.cross(v);
 	    expect(crossProduct.getX()).toEqual( 2 );
 	    expect(crossProduct.getY()).toEqual( 5 );
 	    expect(crossProduct.getZ()).toEqual( -6 );
 	});
-	*/
-	
+
+
     }); // vector3D
 
-    
-/*
+
+
     describe( "check vector4D", function() {
 	var u = vector4D( 1, 2, 2 );
 	var ux = 1;
@@ -212,8 +212,8 @@ describe( "vectors and matrices", function() {
 	});
 
     }); // vector4D
-*/
-/*
+
+
 
     describe( "check matrix2x2", function() {
 	var m = matrix2x2();
@@ -280,8 +280,8 @@ describe( "vectors and matrices", function() {
 	});
 
     }); // matrix2x2
-*/
-/*
+
+
     describe( "check matrix3x3", function() {
 	var m = matrix3x3();
 
@@ -415,8 +415,8 @@ describe( "vectors and matrices", function() {
 	});
 
     }); // matrix3x3
-*/
-/*
+
+
     describe( "check matrix4x4", function() {
 	var m = matrix4x4();
 
@@ -618,6 +618,6 @@ describe( "vectors and matrices", function() {
 	    expect(c.get(3,3)).toBeCloseTo(1);
 	});
     }); // matrix4x4
-*/
-    
+
+
 });
