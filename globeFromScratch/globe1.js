@@ -3,7 +3,7 @@ loader.crossOrigin = '';
 
 earthTex = loader.load('images/2_no_clouds_4k.jpg');
 bumpTex = loader.load('images/elev_bump_4k.jpg');
-waterTex = loader.load('images/water_4k.png');
+waterTex = loader.load('images/water_4k_me.png');
 
 cloudsTex = loader.load('images/fair_clouds_4k.png');
 starsTex = loader.load('images/galaxy_starfield.png');
@@ -31,14 +31,15 @@ function init() {
     radius = 0.5;
     segments = 32;
     rotation = 6;
+    var axis = new THREE.Vector3(-Math.cos(23.5), -Math.sin(23.5), 0);
 
     var sphere = createSphere(radius, segments);
     sphere.rotation.y = rotation;
-    scene.add(sphere);
 
     var clouds = createClouds(radius, segments);
-    clouds.rotation.y = rotation;
-    scene.add(clouds);
+    sphere.rotation.y = rotation;
+    sphere.add(clouds);
+    scene.add(sphere);
 
     var stars = createStars(90, 64);
     scene.add(stars);
@@ -63,8 +64,9 @@ function init() {
 
     function render() {
         controls.update();
-        sphere.rotation.y += 0.0005;
-        clouds.rotation.y += 0.0007;
+        sphere.rotateOnAxis(axis, 0.0005);
+        clouds.rotateOnAxis(axis, 0.0010);
+        // clouds.rotateOnAxis(axis, 0.01);
         requestAnimationFrame(render);
         renderer.render(scene, camera);
     }
