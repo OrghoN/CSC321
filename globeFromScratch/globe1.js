@@ -8,6 +8,9 @@ waterTex = loader.load('images/water_4k_me.png');
 cloudsTex = loader.load('images/fair_clouds_4k.png');
 starsTex = loader.load('images/galaxy_starfield.png');
 
+textureFlare0 = loader.load("images/lensflare0.png");
+textureFlare3 = loader.load("images/lensflare3.png");
+
 function init() {
     // Initialize scene, camera and renderer
     var scene = new THREE.Scene();
@@ -28,45 +31,52 @@ function init() {
     light.position.set(5, 3, 5);
     scene.add(light);
 
-    radius = 0.5;
+    radius = 0.3;
     segments = 32;
     rotation = 6;
     var axis = new THREE.Vector3(-Math.cos(23.5), -Math.sin(23.5), 0);
 
-    var sphere = createSphere(radius, segments);
-    sphere.rotation.y = rotation;
+    var earths = [];
+    var sphere = new THREE.SphereGeometry(radius*5, segments, segments);
 
-    var clouds = createClouds(radius, segments);
-    sphere.rotation.y = rotation;
-    sphere.add(clouds);
-    scene.add(sphere);
+    // var points = THREE.GeometryUtils.randomPointsInGeometry(sphere, 4);
+
+    for (var i = 0; i < 4; i++) {
+      if (i==0){
+        earths.push(createEarth(radius, segments));
+      }
+      else{
+        earths.push(earths[0].clone());
+      }
+        // earths[i].position.set(Math.random()*2, Math.random()*3, Math.random());
+        scene.add(earths[i]);
+    }
 
     var stars = createStars(90, 64);
     scene.add(stars);
 
-    var controls = new THREE.TrackballControls(camera);
-
-    var textureFlare0 = loader.load("images/lensflare0.png");
-    var textureFlare3 = loader.load("images/lensflare3.png");
-
-    var flareColor = new THREE.Color(0xffaacc);
-    var lensFlare = new THREE.LensFlare(textureFlare0, 350, 0.0, THREE.AdditiveBlending, flareColor);
-
-    lensFlare.add(textureFlare3, 60, 0.6, THREE.AdditiveBlending);
-    lensFlare.add(textureFlare3, 70, 0.7, THREE.AdditiveBlending);
-    lensFlare.add(textureFlare3, 120, 0.9, THREE.AdditiveBlending);
-    lensFlare.add(textureFlare3, 70, 1.0, THREE.AdditiveBlending);
-
+    var lensFlare = createLensFlare();
     lensFlare.position.copy(light.position);
     scene.add(lensFlare);
+
+    var rotate = new function() {
+        this.rotationSpeed = 0.0005;
+    };
+
+    var gui = new dat.GUI();
+    gui.add(rotate, 'rotationSpeed', -.5, 0.5);
+
+    var controls = new THREE.TrackballControls(camera);
 
     document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
     function render() {
         controls.update();
-        sphere.rotateOnAxis(axis, 0.0005);
-        clouds.rotateOnAxis(axis, 0.0010);
-        // clouds.rotateOnAxis(axis, 0.01);
+        earths.forEach(function(earth) {
+          earth.rotateOnAxis(axis, rotate.rotationSpeed);
+          earth.children[0].rotateOnAxis(axis, rotate.rotationSpeed + 0.05 * rotate.rotationSpeed);
+        });
+
         requestAnimationFrame(render);
         renderer.render(scene, camera);
     }
@@ -77,6 +87,15 @@ function init() {
 }
 window.onload = init
 
+function createEarth(radius, segments) {
+    var sphere = createSphere(radius, segments);
+    sphere.rotation.y = rotation;
+    var clouds = createClouds(radius, segments);
+    sphere.rotation.y = rotation;
+    sphere.add(clouds);
+
+    return sphere;
+}
 
 function createSphere(radius, segments) {
     return new THREE.Mesh(
@@ -109,4 +128,16 @@ function createStars(radius, segments) {
             side: THREE.BackSide
         })
     );
+}
+
+function createLensFlare() {
+    var flareColor = new THREE.Color(0xffaacc);
+    var lensFlare = new THREE.LensFlare(textureFlare0, 350, 0.0, THREE.AdditiveBlending, flareColor);
+
+    lensFlare.add(textureFlare3, 60, 0.6, THREE.AdditiveBlending);
+    lensFlare.add(textureFlare3, 70, 0.7, THREE.AdditiveBlending);
+    lensFlare.add(textureFlare3, 120, 0.9, THREE.AdditiveBlending);
+    lensFlare.add(textureFlare3, 70, 1.0, THREE.AdditiveBlending);
+
+    return lensFlare;
 }
