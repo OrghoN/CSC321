@@ -31,7 +31,7 @@ function init() {
     light.position.set(5, 3, 5);
     scene.add(light);
 
-    radius = 0.5;
+    radius = 0.3;
     segments = 32;
     rotation = 6;
     var axis = new THREE.Vector3(-Math.cos(23.5), -Math.sin(23.5), 0);
@@ -41,14 +41,15 @@ function init() {
 
     // var points = THREE.GeometryUtils.randomPointsInGeometry(sphere, 4);
 
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 3; i++) {
       if (i==0){
         earths.push(createEarth(radius, segments));
+        earths[i].position.set(0,0.4,0);
       }
       else{
         earths.push(earths[0].clone());
+        earths[i].position.set(earths[i-1].position.y-.2,earths[i-1].position.z-.2,earths[i-1].position.x-.2);
       }
-        // earths[i].position.set(Math.random()*2, Math.random()*3, Math.random());
         scene.add(earths[i]);
     }
 
@@ -66,7 +67,7 @@ function init() {
     var gui = new dat.GUI();
     gui.add(rotate, 'rotationSpeed', -.5, 0.5);
 
-    var controls = new THREE.TrackballControls(camera);
+    var controls = new THREE.TrackballControls(camera, renderer.domElement);
 
     document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
