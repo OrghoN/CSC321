@@ -31,7 +31,7 @@ function init() {
     light.position.set(5, 3, 5);
     scene.add(light);
 
-    radius = 0.3;
+    radius = 0.5;
     segments = 32;
     rotation = 6;
     var axis = new THREE.Vector3(-Math.cos(23.5), -Math.sin(23.5), 0);
@@ -41,7 +41,7 @@ function init() {
 
     // var points = THREE.GeometryUtils.randomPointsInGeometry(sphere, 4);
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 2; i++) {
       if (i==0){
         earths.push(createEarth(radius, segments));
       }
@@ -91,7 +91,7 @@ function createEarth(radius, segments) {
     var sphere = createSphere(radius, segments);
     sphere.rotation.y = rotation;
     var clouds = createClouds(radius, segments);
-    sphere.rotation.y = rotation;
+    clouds.rotation.y = rotation;
     sphere.add(clouds);
 
     return sphere;
