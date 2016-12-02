@@ -41,13 +41,13 @@ function init() {
 
     // var points = THREE.GeometryUtils.randomPointsInGeometry(sphere, 4);
 
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 2; i++) {
         if (i == 0) {
             earths.push(createEarth(radius, segments));
             // earths[i].position.set(0, 0.4, 0);
         } else {
             earths.push(earths[0].clone());
-            earths[i].position.set(earths[i - 1].position.y - .2, earths[i - 1].position.z - .2, earths[i - 1].position.x - .2);
+            // earths[i].position.set(earths[i - 1].position.y - .2, earths[i - 1].position.z - .2, earths[i - 1].position.x - .2);
         }
         scene.add(earths[i]);
     }
