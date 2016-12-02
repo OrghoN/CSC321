@@ -23,389 +23,440 @@
         }
     </style>
 </head>
+
 <body>
 
-<!-- Div which will hold the Output -->
-<div id="WebGL-output">
-</div>
-
-<!-- Javascript code that runs our Three.js examples -->
-<script type="text/javascript">
-
-    // Here is a place to experiment with
-    // matrix and vector arithmetic.
-    var arithmetic = function() {
-
-        // Create a 4 x 4 matrix that models a rotation of
-	// 30 degrees (PI/6 radians) around the z axis.
-        var a = new THREE.Matrix4();
-        a.makeRotationZ( Math.PI/6 );
-    
-        // Create a 4 x 4 matrix that models a rotation of
-	// 60 degrees (PI/3 radians) around the z axis.
-        var b = new THREE.Matrix4();
-        b.makeRotationZ( Math.PI/3 );
-
-        // Create a 4 element vector the describes the location
-	// of a point on the x axis, whose distance
-	// from the origin is 1.0.
-        var u = new THREE.Vector4( 1, 0, 0 );
-
-        // Create a 4 element vector the describes the location
-	// of a point on the y axis, whose distance
-	// from the origin is 1.0.
-        var v = new THREE.Vector4( 0, 1, 0 );
-
-        // Demonstrate rotation.
-        console.log( "\nHere is a matrix that models a rotation by 60 degrees around the z axis:\n" );
-        printMatrix( a );
-        console.log( "\nHere is a vector:\n" );
-        printVector( u );
-        console.log( "\nHere is the product of the matrix and the vector: \n\n" );
-        printMatrixVectorProduct( a, u );
-
-        // Demonstrate scaling.
-        //   ADD CODE HERE
-	
-        // Demonstrate translation.
-        //   ADD CODE HERE
-
-        // Demonstrate that a rotation of 120 degrees (2/3 * PI radians)
-	// followed by a rotation of 240 degrees (4/3 * PI radians) leaves
-	// a point unchanged.
-        //   ADD CODE HERE
-
-    }; // arithmetic()
-
-    // Convert a number to a string.
-    // Show 2 digits to the right of the decimal point.
-    var formatElement = function( e ) {
-        if( e >= 0 ) {
-            return " " + e.toFixed(2);
-        } // if
-        else {
-            return e.toFixed(2);
-        } //
-    };
-
-    // Print a 4 element vector (a THREE.Vector4 object)
-    // in the JavaScript console.
-    var printVector = function( v ) {
-        var elements = v.toArray();
-	var v0 = formatElement( elements[0] );
-	var v1 = formatElement( elements[1] );
-	var v2 = formatElement( elements[2] );
-	var v3 = formatElement( elements[3] );
-        console.log( "[ " + v0 + " " + v1 + " " + v2 + " " + v3 + " ]" );
-    }; // printVector()
-
-    // Print a 4 x 4 matrix (a THREE.Matrix4 object)
-    // in the JavaScript console.
-    var printMatrix = function( m ) {
-      var elements = m.toArray();
-      var m00 = formatElement( elements[0] );
-      var m01 = formatElement( elements[4] );
-      var m02 = formatElement( elements[8] );
-      var m03 = formatElement( elements[12] );
-
-      var m10 = formatElement( elements[1] );
-      var m11 = formatElement( elements[5] );
-      var m12 = formatElement( elements[9] );
-      var m13 = formatElement( elements[13] );
-
-      var m20 = formatElement( elements[2] );
-      var m21 = formatElement( elements[6] );
-      var m22 = formatElement( elements[10] );
-      var m23 = formatElement( elements[14] );
-
-      var m30 = formatElement( elements[3] );
-      var m31 = formatElement( elements[7] );
-      var m32 = formatElement( elements[11] );
-      var m33 = formatElement( elements[15] );
-
-      console.log( "[ " + m00 + "  " + m01 + "  " + m02 + "  " + m03 + " ]" );
-      console.log( "[ " + m10 + "  " + m11 + "  " + m12 + "  " + m13 + " ]" );
-      console.log( "[ " + m20 + "  " + m21 + "  " + m22 + "  " + m23 + " ]" );
-      console.log( "[ " + m30 + "  " + m31 + "  " + m32 + "  " + m33 + " ]" );
-    }; // printMatrix()
-
-    // Print a matrix, a vector, and the product
-    // of the matrix and vector in the JavaScript console.
-    // The 4 x 4 matrix is a THREE.Matrix4 object.
-    // The 4 element vector is a THREE.Vector4 object.
-    var printMatrixVectorProduct = function( m, v ) {
-      var elements = m.toArray();
-      var m00 = formatElement( elements[0] );
-      var m01 = formatElement( elements[4] );
-      var m02 = formatElement( elements[8] );
-      var m03 = formatElement( elements[12] );
-
-      var m10 = formatElement( elements[1] );
-      var m11 = formatElement( elements[5] );
-      var m12 = formatElement( elements[9] );
-      var m13 = formatElement( elements[13] );
-
-      var m20 = formatElement( elements[2] );
-      var m21 = formatElement( elements[6] );
-      var m22 = formatElement( elements[10] );
-      var m23 = formatElement( elements[14] );
-
-      var m30 = formatElement( elements[3] );
-      var m31 = formatElement( elements[7] );
-      var m32 = formatElement( elements[11] );
-      var m33 = formatElement( elements[15] );
-
-      elements = v.toArray();
-      var v0 = formatElement( elements[0] );
-      var v1 = formatElement( elements[1] );
-      var v2 = formatElement( elements[2] );
-      var v3 = formatElement( elements[3] );
-
-      v.applyMatrix4( m );
-      elements = v.toArray();
-      var p0 = formatElement( elements[0] );
-      var p1 = formatElement( elements[1] );
-      var p2 = formatElement( elements[2] );
-      var p3 = formatElement( elements[3] );
-
-      console.log( "[ " + m00 + "  " + m01 + "  " + m02 + "  " + m03 + " ]   " +
-                   "[ " + v0 + " ]   " +
-		   "[ " + p0 + " ]" );
-      console.log( "[ " + m10 + "  " + m11 + "  " + m12 + "  " + m13 + " ] x " +
-                   "[ " + v1 + " ] = " +
-		   "[ " + p1 + " ]" );
-      console.log( "[ " + m20 + "  " + m21 + "  " + m22 + "  " + m23 + " ]   " +
-                   "[ " + v2 + " ]   " +
-		   "[ " + p2 + " ]" );
-      console.log( "[ " + m30 + "  " + m31 + "  " + m32 + "  " + m33 + " ]   " +
-                   "[ " + v3 + " ]   " +
-		   "[ " + p3 + " ]" );
-    }; // printMatrixVector()
-
-    // Print two matrices and their product in
-    // the JavaScript console.
-    // The matrices are THREE.Matrix4 objects.
-    var printMatrixMatrixProduct = function( a, b ) {
-      var elements = a.toArray();
-      var a00 = formatElement( elements[0] );
-      var a01 = formatElement( elements[4] );
-      var a02 = formatElement( elements[8] );
-      var a03 = formatElement( elements[12] );
-
-      var a10 = formatElement( elements[1] );
-      var a11 = formatElement( elements[5] );
-      var a12 = formatElement( elements[9] );
-      var a13 = formatElement( elements[13] );
-
-      var a20 = formatElement( elements[2] );
-      var a21 = formatElement( elements[6] );
-      var a22 = formatElement( elements[10] );
-      var a23 = formatElement( elements[14] );
-
-      var a30 = formatElement( elements[3] );
-      var a31 = formatElement( elements[7] );
-      var a32 = formatElement( elements[11] );
-      var a33 = formatElement( elements[15] );
-
-      elements = b.toArray();
-      var b00 = formatElement( elements[0] );
-      var b01 = formatElement( elements[4] );
-      var b02 = formatElement( elements[8] );
-      var b03 = formatElement( elements[12] );
-
-      var b10 = formatElement( elements[1] );
-      var b11 = formatElement( elements[5] );
-      var b12 = formatElement( elements[9] );
-      var b13 = formatElement( elements[13] );
-
-      var b20 = formatElement( elements[2] );
-      var b21 = formatElement( elements[6] );
-      var b22 = formatElement( elements[10] );
-      var b23 = formatElement( elements[14] );
-
-      var b30 = formatElement( elements[3] );
-      var b31 = formatElement( elements[7] );
-      var b32 = formatElement( elements[11] );
-      var b33 = formatElement( elements[15] );
-
-      var c = a.multiply( b );
-      elements = c.toArray();
-      var c00 = formatElement( elements[0] );
-      var c01 = formatElement( elements[4] );
-      var c02 = formatElement( elements[8] );
-      var c03 = formatElement( elements[12] );
-
-      var c10 = formatElement( elements[1] );
-      var c11 = formatElement( elements[5] );
-      var c12 = formatElement( elements[9] );
-      var c13 = formatElement( elements[13] );
-
-      var c20 = formatElement( elements[2] );
-      var c21 = formatElement( elements[6] );
-      var c22 = formatElement( elements[10] );
-      var c23 = formatElement( elements[14] );
-
-      var c30 = formatElement( elements[3] );
-      var c31 = formatElement( elements[7] );
-      var c32 = formatElement( elements[11] );
-      var c33 = formatElement( elements[15] );
-
-      console.log( "[ " + a00 + "  " + a01 + "  " + a02 + "  " + a03 + " ]   " +
-                   "[ " + b00 + "  " + b01 + "  " + b02 + "  " + b03 + " ]   " +
-                   "[ " + c00 + "  " + c01 + "  " + c02 + "  " + c03 + " ]   " );
-
-      console.log( "[ " + a10 + "  " + a11 + "  " + a12 + "  " + a13 + " ] x " +
-                   "[ " + b10 + "  " + b11 + "  " + b12 + "  " + b13 + " ] = " +
-                   "[ " + c10 + "  " + c11 + "  " + c12 + "  " + c13 + " ]   " );
-
-      console.log( "[ " + a20 + "  " + a21 + "  " + a22 + "  " + a23 + " ]   " +
-                   "[ " + b20 + "  " + b21 + "  " + b22 + "  " + b23 + " ]   " +
-                   "[ " + c20 + "  " + c21 + "  " + c22 + "  " + c23 + " ]   " );
-
-      console.log( "[ " + a30 + "  " + a31 + "  " + a32 + "  " + a33 + " ]   " +
-                   "[ " + b30 + "  " + b31 + "  " + b32 + "  " + b33 + " ]   " +
-                   "[ " + c30 + "  " + c31 + "  " + c32 + "  " + c33 + " ]   " );
-    }; // printMatrixMatrixProduct()
-
-
-    // once everything is loaded, we run our Three.js stuff.
-    function init() {
-
-        // create a scene, that will hold all our elements such as objects, cameras and lights.
-        var scene = new THREE.Scene();
-
-        // create a camera, which defines where we're looking at.
-        // a frustrum is a pyramid with a square base the apex cut off
-        // 45 is vertical field of view of the frustrum
-        // window.innerWidth/window.innerHeight is aspect ratio of the frustrum
-        // 0.1 is the distance to the near plane of the frustrum
-        // 1000 is the distance to the far plane of the frustrum
-        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-        // create a render and set the size
-        var renderer = new THREE.WebGLRenderer();
-        // specify the color of the background for this image
-        renderer.setClearColor(new THREE.Color(0xFFEEAA));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.shadowMapEnabled = true;
-
-
-        // create the back wall
-        var planeGeometry = new THREE.PlaneGeometry(60, 60);
-        var planeMaterial0 = new THREE.MeshLambertMaterial({color: 0x88AADD});
-
-        var plane0 = new THREE.Mesh(planeGeometry, planeMaterial0);
-        plane0.receiveShadow = true;
-
-        // rotate and position the plane
-        //plane.rotation.x = -0.5 * Math.PI;
-        plane0.position.x = -24;
-        plane0.position.y = -24;
-        plane0.position.z = -48;
-
-        // add the plane to the scene
-        scene.add(plane0);
-
-        // create the left wall
-        var planeMaterial1 = new THREE.MeshLambertMaterial({color: 0x66DD88});
-
-        var plane1 = new THREE.Mesh(planeGeometry, planeMaterial1);
-        plane1.receiveShadow = true;
-
-        // rotate and position the plane
-        plane1.rotation.y = 0.5 * Math.PI;
-        plane1.position.x =  -48;
-        plane1.position.y =  -24;
-        plane1.position.z =  -24;
-
-        // add the plane to the scene
-        scene.add(plane1);
-
-        var planeMaterial2 = new THREE.MeshLambertMaterial({color: 0xAADD44});
-
-        // create the floor
-        var plane2 = new THREE.Mesh(planeGeometry, planeMaterial2);
-        plane2.receiveShadow = true;
-
-        // rotate and position the plane
-        plane2.rotation.x = -0.5 * Math.PI;
-        plane2.position.x =  -24;
-        plane2.position.y =  -48;
-        plane2.position.z =  -24;
-
-        // add the plane to the scene
-        scene.add(plane2);
-	
-        // show axes in the screen
-        // specify the lengths of the 3 axes
-        var axes = new THREE.AxisHelper(24);
-        scene.add(axes);
-
-        // position and point the camera to the center of the scene
-        camera.position.x = 20;
-        camera.position.y = 40;
-        camera.position.z = 60;
-        camera.lookAt(scene.position);
-
-        var origin = new THREE.Object3D();
-        origin.position = new THREE.Vector3( 0, 0, 0 );
-
-        // add spotlights for the shadows
-        var directionalLight0 = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight0.castShadow = true;
-        directionalLight0.target = origin;
-        directionalLight0.position.set( 20, 40, 80 );
-
-        directionalLight0.shadeCameraNear = 100;
-        directionalLight0.shadeCameraFar = -100;
-        directionalLight0.shadeCameraLeft = -100;
-        directionalLight0.shadeCameraRight = 100;
-        directionalLight0.shadeCameraTop = 100;
-        directionalLight0.shadeCameraBottom = -100;
-
-        scene.add(directionalLight0);
-	
-        var directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight1.castShadow = true;
-        directionalLight1.target = origin;
-        directionalLight1.position.set( 20, 80, 40 );
-
-        directionalLight1.shadeCameraNear = 100;
-        directionalLight1.shadeCameraFar = -100;
-        directionalLight1.shadeCameraLeft = -100;
-        directionalLight1.shadeCameraRight = 100;
-        directionalLight1.shadeCameraTop = 100;
-        directionalLight1.shadeCameraBottom = -100;
-
-        scene.add(directionalLight1);
-
-        var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight2.castShadow = true;
-        directionalLight2.target = origin;
-        directionalLight2.position.set( 80, 40, 60 );
-
-        directionalLight2.shadeCameraNear = 100;
-        directionalLight2.shadeCameraFar = -100;
-        directionalLight2.shadeCameraLeft = -100;
-        directionalLight2.shadeCameraRight = 100;
-        directionalLight2.shadeCameraTop = 100;
-        directionalLight2.shadeCameraBottom = -100;
-
-        scene.add(directionalLight2);
-	
-        // add the output of the renderer to the html element
-        document.getElementById("WebGL-output").appendChild(renderer.domElement);
-
-        // render the scene
-        renderer.render(scene, camera);
-
-        // Call the function that writes the results
-        // of our experiments with matrix and vector
-        // arithmetic in the JavaScript console.
-        arithmetic();
-    }
-    window.onload = init;
-
-</script>
+    <!-- Div which will hold the Output -->
+    <div id="WebGL-output">
+    </div>
+
+    <!-- Javascript code that runs our Three.js examples -->
+    <script type="text/javascript">
+        // Here is a place to experiment with
+        // matrix and vector arithmetic.
+        var arithmetic = function() {
+
+            // Create a 4 x 4 matrix that models a rotation of
+            // 30 degrees (PI/6 radians) around the z axis.
+            var a = new THREE.Matrix4();
+            a.makeRotationZ(Math.PI / 6);
+
+            // Create a 4 x 4 matrix that models a rotation of
+            // 60 degrees (PI/3 radians) around the z axis.
+            var b = new THREE.Matrix4();
+            b.makeRotationZ(Math.PI / 3);
+
+            // Create a 4 element vector the describes the location
+            // of a point on the x axis, whose distance
+            // from the origin is 1.0.
+            var u = new THREE.Vector4(1, 0, 0);
+
+            // Create a 4 element vector the describes the location
+            // of a point on the y axis, whose distance
+            // from the origin is 1.0.
+            var v = new THREE.Vector4(0, 1, 0);
+
+            // Demonstrate rotation.
+            console.log("\nHere is a matrix that models a rotation by 60 degrees around the z axis:\n");
+            printMatrix(a);
+            console.log("\nHere is a vector:\n");
+            printVector(u);
+            console.log("\nHere is the product of the matrix and the vector: \n\n");
+            printMatrixVectorProduct(a, u);
+
+            // Demonstrate scaling.
+            var scaleMatrix = new THREE.Matrix4();
+            scaleMatrix.makeScale(2,2,2);
+
+            var scaleVector = new THREE.Vector4(1, 2, 3);
+
+            console.log("\nHere is a matrix that models scaling by a factor of 2:\n");
+            printMatrix(scaleMatrix);
+
+            console.log("\nHere is a vector:\n");
+            printVector(scaleVector);
+
+            console.log("\nHere is the product of the matrix and the vector: \n\n");
+            printMatrixVectorProduct(scaleMatrix, scaleVector);
+
+
+            // Demonstrate translation.
+            var translateMatrix = new THREE.Matrix4();
+            translateMatrix.makeTranslation(2,3,1);
+
+            var translateVector = new THREE.Vector4(1, 2, 3);
+
+            console.log("\nHere is a matrix that models translation:\n");
+            printMatrix(translateMatrix);
+
+            console.log("\nHere is a vector:\n");
+            printVector(translateVector);
+
+            console.log("\nHere is the product of the matrix and the vector: \n\n");
+            printMatrixVectorProduct(translateMatrix, translateVector);
+
+            // Demonstrate that a rotation of 120 degrees (2/3 * PI radians)
+            // followed by a rotation of 240 degrees (4/3 * PI radians) leaves
+            // a point unchanged.
+            var rotationMatrix = new THREE.Matrix4();
+            var rotationMatrix2 = new THREE.Matrix4();
+            var rotationVector = new THREE.Vector4(1, 2, 3);
+
+            rotationMatrix.makeRotationZ(2/3*Math.PI);
+            console.log("\nHere is a matrix that models rotation of 120 degrees:\n");
+            printMatrix(rotationMatrix);
+
+            rotationMatrix2.makeRotationZ(4/3*Math.PI);
+            console.log("\nHere is a matrix that models rotation 240 degrees:\n");
+            printMatrix(rotationMatrix2);
+
+            rotationMatrix2.multiplyMatrices ( rotationMatrix, rotationMatrix2 )
+            console.log("\nHere is a matrix that models rotation 120 degrees followed by 240 degrees:\n");
+            printMatrix(rotationMatrix2);
+
+            console.log("\nHere is a vector:\n");
+            printVector(rotationVector);
+
+            console.log("\nHere is the product of the matrix and the vector: \n\n");
+            printMatrixVectorProduct(rotationMatrix2, rotationVector);
+
+        }; // arithmetic()
+
+        // Convert a number to a string.
+        // Show 2 digits to the right of the decimal point.
+        var formatElement = function(e) {
+            if (e >= 0) {
+                return " " + e.toFixed(2);
+            } // if
+            else {
+                return e.toFixed(2);
+            } //
+        };
+
+        // Print a 4 element vector (a THREE.Vector4 object)
+        // in the JavaScript console.
+        var printVector = function(v) {
+            var elements = v.toArray();
+            var v0 = formatElement(elements[0]);
+            var v1 = formatElement(elements[1]);
+            var v2 = formatElement(elements[2]);
+            var v3 = formatElement(elements[3]);
+            console.log("[ " + v0 + " " + v1 + " " + v2 + " " + v3 + " ]");
+        }; // printVector()
+
+        // Print a 4 x 4 matrix (a THREE.Matrix4 object)
+        // in the JavaScript console.
+        var printMatrix = function(m) {
+            var elements = m.toArray();
+            var m00 = formatElement(elements[0]);
+            var m01 = formatElement(elements[4]);
+            var m02 = formatElement(elements[8]);
+            var m03 = formatElement(elements[12]);
+
+            var m10 = formatElement(elements[1]);
+            var m11 = formatElement(elements[5]);
+            var m12 = formatElement(elements[9]);
+            var m13 = formatElement(elements[13]);
+
+            var m20 = formatElement(elements[2]);
+            var m21 = formatElement(elements[6]);
+            var m22 = formatElement(elements[10]);
+            var m23 = formatElement(elements[14]);
+
+            var m30 = formatElement(elements[3]);
+            var m31 = formatElement(elements[7]);
+            var m32 = formatElement(elements[11]);
+            var m33 = formatElement(elements[15]);
+
+            console.log("[ " + m00 + "  " + m01 + "  " + m02 + "  " + m03 + " ]");
+            console.log("[ " + m10 + "  " + m11 + "  " + m12 + "  " + m13 + " ]");
+            console.log("[ " + m20 + "  " + m21 + "  " + m22 + "  " + m23 + " ]");
+            console.log("[ " + m30 + "  " + m31 + "  " + m32 + "  " + m33 + " ]");
+        }; // printMatrix()
+
+        // Print a matrix, a vector, and the product
+        // of the matrix and vector in the JavaScript console.
+        // The 4 x 4 matrix is a THREE.Matrix4 object.
+        // The 4 element vector is a THREE.Vector4 object.
+        var printMatrixVectorProduct = function(m, v) {
+            var elements = m.toArray();
+            var m00 = formatElement(elements[0]);
+            var m01 = formatElement(elements[4]);
+            var m02 = formatElement(elements[8]);
+            var m03 = formatElement(elements[12]);
+
+            var m10 = formatElement(elements[1]);
+            var m11 = formatElement(elements[5]);
+            var m12 = formatElement(elements[9]);
+            var m13 = formatElement(elements[13]);
+
+            var m20 = formatElement(elements[2]);
+            var m21 = formatElement(elements[6]);
+            var m22 = formatElement(elements[10]);
+            var m23 = formatElement(elements[14]);
+
+            var m30 = formatElement(elements[3]);
+            var m31 = formatElement(elements[7]);
+            var m32 = formatElement(elements[11]);
+            var m33 = formatElement(elements[15]);
+
+            elements = v.toArray();
+            var v0 = formatElement(elements[0]);
+            var v1 = formatElement(elements[1]);
+            var v2 = formatElement(elements[2]);
+            var v3 = formatElement(elements[3]);
+
+            v.applyMatrix4(m);
+            elements = v.toArray();
+            var p0 = formatElement(elements[0]);
+            var p1 = formatElement(elements[1]);
+            var p2 = formatElement(elements[2]);
+            var p3 = formatElement(elements[3]);
+
+            console.log("[ " + m00 + "  " + m01 + "  " + m02 + "  " + m03 + " ]   " +
+                "[ " + v0 + " ]   " +
+                "[ " + p0 + " ]");
+            console.log("[ " + m10 + "  " + m11 + "  " + m12 + "  " + m13 + " ] x " +
+                "[ " + v1 + " ] = " +
+                "[ " + p1 + " ]");
+            console.log("[ " + m20 + "  " + m21 + "  " + m22 + "  " + m23 + " ]   " +
+                "[ " + v2 + " ]   " +
+                "[ " + p2 + " ]");
+            console.log("[ " + m30 + "  " + m31 + "  " + m32 + "  " + m33 + " ]   " +
+                "[ " + v3 + " ]   " +
+                "[ " + p3 + " ]");
+        }; // printMatrixVector()
+
+        // Print two matrices and their product in
+        // the JavaScript console.
+        // The matrices are THREE.Matrix4 objects.
+        var printMatrixMatrixProduct = function(a, b) {
+            var elements = a.toArray();
+            var a00 = formatElement(elements[0]);
+            var a01 = formatElement(elements[4]);
+            var a02 = formatElement(elements[8]);
+            var a03 = formatElement(elements[12]);
+
+            var a10 = formatElement(elements[1]);
+            var a11 = formatElement(elements[5]);
+            var a12 = formatElement(elements[9]);
+            var a13 = formatElement(elements[13]);
+
+            var a20 = formatElement(elements[2]);
+            var a21 = formatElement(elements[6]);
+            var a22 = formatElement(elements[10]);
+            var a23 = formatElement(elements[14]);
+
+            var a30 = formatElement(elements[3]);
+            var a31 = formatElement(elements[7]);
+            var a32 = formatElement(elements[11]);
+            var a33 = formatElement(elements[15]);
+
+            elements = b.toArray();
+            var b00 = formatElement(elements[0]);
+            var b01 = formatElement(elements[4]);
+            var b02 = formatElement(elements[8]);
+            var b03 = formatElement(elements[12]);
+
+            var b10 = formatElement(elements[1]);
+            var b11 = formatElement(elements[5]);
+            var b12 = formatElement(elements[9]);
+            var b13 = formatElement(elements[13]);
+
+            var b20 = formatElement(elements[2]);
+            var b21 = formatElement(elements[6]);
+            var b22 = formatElement(elements[10]);
+            var b23 = formatElement(elements[14]);
+
+            var b30 = formatElement(elements[3]);
+            var b31 = formatElement(elements[7]);
+            var b32 = formatElement(elements[11]);
+            var b33 = formatElement(elements[15]);
+
+            var c = a.multiply(b);
+            elements = c.toArray();
+            var c00 = formatElement(elements[0]);
+            var c01 = formatElement(elements[4]);
+            var c02 = formatElement(elements[8]);
+            var c03 = formatElement(elements[12]);
+
+            var c10 = formatElement(elements[1]);
+            var c11 = formatElement(elements[5]);
+            var c12 = formatElement(elements[9]);
+            var c13 = formatElement(elements[13]);
+
+            var c20 = formatElement(elements[2]);
+            var c21 = formatElement(elements[6]);
+            var c22 = formatElement(elements[10]);
+            var c23 = formatElement(elements[14]);
+
+            var c30 = formatElement(elements[3]);
+            var c31 = formatElement(elements[7]);
+            var c32 = formatElement(elements[11]);
+            var c33 = formatElement(elements[15]);
+
+            console.log("[ " + a00 + "  " + a01 + "  " + a02 + "  " + a03 + " ]   " +
+                "[ " + b00 + "  " + b01 + "  " + b02 + "  " + b03 + " ]   " +
+                "[ " + c00 + "  " + c01 + "  " + c02 + "  " + c03 + " ]   ");
+
+            console.log("[ " + a10 + "  " + a11 + "  " + a12 + "  " + a13 + " ] x " +
+                "[ " + b10 + "  " + b11 + "  " + b12 + "  " + b13 + " ] = " +
+                "[ " + c10 + "  " + c11 + "  " + c12 + "  " + c13 + " ]   ");
+
+            console.log("[ " + a20 + "  " + a21 + "  " + a22 + "  " + a23 + " ]   " +
+                "[ " + b20 + "  " + b21 + "  " + b22 + "  " + b23 + " ]   " +
+                "[ " + c20 + "  " + c21 + "  " + c22 + "  " + c23 + " ]   ");
+
+            console.log("[ " + a30 + "  " + a31 + "  " + a32 + "  " + a33 + " ]   " +
+                "[ " + b30 + "  " + b31 + "  " + b32 + "  " + b33 + " ]   " +
+                "[ " + c30 + "  " + c31 + "  " + c32 + "  " + c33 + " ]   ");
+        }; // printMatrixMatrixProduct()
+
+
+        // once everything is loaded, we run our Three.js stuff.
+        function init() {
+
+            // create a scene, that will hold all our elements such as objects, cameras and lights.
+            var scene = new THREE.Scene();
+
+            // create a camera, which defines where we're looking at.
+            // a frustrum is a pyramid with a square base the apex cut off
+            // 45 is vertical field of view of the frustrum
+            // window.innerWidth/window.innerHeight is aspect ratio of the frustrum
+            // 0.1 is the distance to the near plane of the frustrum
+            // 1000 is the distance to the far plane of the frustrum
+            var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            // create a render and set the size
+            var renderer = new THREE.WebGLRenderer();
+            // specify the color of the background for this image
+            renderer.setClearColor(new THREE.Color(0xFFEEAA));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMapEnabled = true;
+
+
+            // create the back wall
+            var planeGeometry = new THREE.PlaneGeometry(60, 60);
+            var planeMaterial0 = new THREE.MeshLambertMaterial({
+                color: 0x88AADD
+            });
+
+            var plane0 = new THREE.Mesh(planeGeometry, planeMaterial0);
+            plane0.receiveShadow = true;
+
+            // rotate and position the plane
+            //plane.rotation.x = -0.5 * Math.PI;
+            plane0.position.x = -24;
+            plane0.position.y = -24;
+            plane0.position.z = -48;
+
+            // add the plane to the scene
+            scene.add(plane0);
+
+            // create the left wall
+            var planeMaterial1 = new THREE.MeshLambertMaterial({
+                color: 0x66DD88
+            });
+
+            var plane1 = new THREE.Mesh(planeGeometry, planeMaterial1);
+            plane1.receiveShadow = true;
+
+            // rotate and position the plane
+            plane1.rotation.y = 0.5 * Math.PI;
+            plane1.position.x = -48;
+            plane1.position.y = -24;
+            plane1.position.z = -24;
+
+            // add the plane to the scene
+            scene.add(plane1);
+
+            var planeMaterial2 = new THREE.MeshLambertMaterial({
+                color: 0xAADD44
+            });
+
+            // create the floor
+            var plane2 = new THREE.Mesh(planeGeometry, planeMaterial2);
+            plane2.receiveShadow = true;
+
+            // rotate and position the plane
+            plane2.rotation.x = -0.5 * Math.PI;
+            plane2.position.x = -24;
+            plane2.position.y = -48;
+            plane2.position.z = -24;
+
+            // add the plane to the scene
+            scene.add(plane2);
+
+            // show axes in the screen
+            // specify the lengths of the 3 axes
+            var axes = new THREE.AxisHelper(24);
+            scene.add(axes);
+
+            // position and point the camera to the center of the scene
+            camera.position.x = 20;
+            camera.position.y = 40;
+            camera.position.z = 60;
+            camera.lookAt(scene.position);
+
+            var origin = new THREE.Object3D();
+            origin.position = new THREE.Vector3(0, 0, 0);
+
+            // add spotlights for the shadows
+            var directionalLight0 = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight0.castShadow = true;
+            directionalLight0.target = origin;
+            directionalLight0.position.set(20, 40, 80);
+
+            directionalLight0.shadeCameraNear = 100;
+            directionalLight0.shadeCameraFar = -100;
+            directionalLight0.shadeCameraLeft = -100;
+            directionalLight0.shadeCameraRight = 100;
+            directionalLight0.shadeCameraTop = 100;
+            directionalLight0.shadeCameraBottom = -100;
+
+            scene.add(directionalLight0);
+
+            var directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight1.castShadow = true;
+            directionalLight1.target = origin;
+            directionalLight1.position.set(20, 80, 40);
+
+            directionalLight1.shadeCameraNear = 100;
+            directionalLight1.shadeCameraFar = -100;
+            directionalLight1.shadeCameraLeft = -100;
+            directionalLight1.shadeCameraRight = 100;
+            directionalLight1.shadeCameraTop = 100;
+            directionalLight1.shadeCameraBottom = -100;
+
+            scene.add(directionalLight1);
+
+            var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight2.castShadow = true;
+            directionalLight2.target = origin;
+            directionalLight2.position.set(80, 40, 60);
+
+            directionalLight2.shadeCameraNear = 100;
+            directionalLight2.shadeCameraFar = -100;
+            directionalLight2.shadeCameraLeft = -100;
+            directionalLight2.shadeCameraRight = 100;
+            directionalLight2.shadeCameraTop = 100;
+            directionalLight2.shadeCameraBottom = -100;
+
+            scene.add(directionalLight2);
+
+            // add the output of the renderer to the html element
+            document.getElementById("WebGL-output").appendChild(renderer.domElement);
+
+            // render the scene
+            renderer.render(scene, camera);
+
+            // Call the function that writes the results
+            // of our experiments with matrix and vector
+            // arithmetic in the JavaScript console.
+            arithmetic();
+        }
+        window.onload = init;
+    </script>
 </body>
+
 </html>
