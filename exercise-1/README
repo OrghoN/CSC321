@@ -1,0 +1,24 @@
+
+Create a PDF document from qa321-09dec2016.tex and planets.png by
+typing:
+
+  pdflatex qa321-09dec2016.tex
+
+You will need to type "pdflatex qa321-09dec2016.tex" twice to
+see the number of the figure in the PDF document.
+
+Make only small changes in qa321-09dec2016.tex before typing
+"pdflatex qa321-09dec2016.tex" again. Let the pdflatex compiler
+catch errors. If you make only small changes between compilations,
+you will find it easier to locate and correct errors.
+
+Study and imitate what you see here to answers the questions
+for Exercise 1.
+
+If you need to learn how to use other mathematical symbols in LaTeX,
+search on the Web with the keywords "LaTeX math" or "LaTeX amsmath."
+
+Replace the reference to planets in qa321-09dec2016.tex with
+a reference to your image file. Do not include the file
+extension (".png" or ".jpg") in the reference. Change the specification
+of the image's width in qa321-09dec2016.tex as you wish.
