@@ -31,25 +31,24 @@ function init() {
     light.position.set(5, 3, 5);
     scene.add(light);
 
-    radius = 0.3;
+    radius = 0.5;
     segments = 32;
     rotation = 6;
     var axis = new THREE.Vector3(-Math.cos(23.5), -Math.sin(23.5), 0);
 
     var earths = [];
-    var sphere = new THREE.SphereGeometry(radius*5, segments, segments);
+    var sphere = new THREE.SphereGeometry(radius * 5, segments, segments);
 
     // var points = THREE.GeometryUtils.randomPointsInGeometry(sphere, 4);
 
-    for (var i = 0; i < 3; i++) {
-      if (i==0){
-        earths.push(createEarth(radius, segments));
-        earths[i].position.set(0,0.4,0);
-      }
-      else{
-        earths.push(earths[0].clone());
-        earths[i].position.set(earths[i-1].position.y-.2,earths[i-1].position.z-.2,earths[i-1].position.x-.2);
-      }
+    for (var i = 0; i < 2; i++) {
+        if (i == 0) {
+            earths.push(createEarth(radius, segments));
+            // earths[i].position.set(0, 0.4, 0);
+        } else {
+            earths.push(earths[0].clone());
+            // earths[i].position.set(earths[i - 1].position.y - .2, earths[i - 1].position.z - .2, earths[i - 1].position.x - .2);
+        }
         scene.add(earths[i]);
     }
 
@@ -73,9 +72,10 @@ function init() {
 
     function render() {
         controls.update();
+
         earths.forEach(function(earth) {
-          earth.rotateOnAxis(axis, rotate.rotationSpeed);
-          earth.children[0].rotateOnAxis(axis, rotate.rotationSpeed + 0.05 * rotate.rotationSpeed);
+            earth.rotateOnAxis(axis, rotate.rotationSpeed);
+            earth.children[0].rotateOnAxis(axis, rotate.rotationSpeed + 0.05 * rotate.rotationSpeed);
         });
 
         requestAnimationFrame(render);
