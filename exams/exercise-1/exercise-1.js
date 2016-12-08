@@ -18,7 +18,7 @@ function cone(u, v) {
     return new THREE.Vector3(x, y, z);
 }
 
-function cylinder(u, v) {
+function sphere(u, v) {
     var radius = 1;
     var angle2 = u * 2 * Math.PI; //scaling u to angle
     var angle1 = v * 2 * Math.PI; //scaling v to angle
