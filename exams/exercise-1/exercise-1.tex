@@ -36,12 +36,7 @@
 	\item A function of two variables, each of which takes a value in the interval [0,1], that returns a vector that describes a point on a cylinder (but not on the cylinder's circular end caps).
 
 	      \begin{answer}
-	      	\begin{align*}
-	      		\vec{u} =
-	      		\begin{bmatrix}
-	      		\sin \theta & \cos \theta & z
-	      		\end{bmatrix}
-	      	\end{align*}
+
 	      \end{answer}
 
 	\item A function of two variables, each of which takes a value in the interval [0,1], that returns a vector that describes a point on a cone (but not on the cone's circular base).
@@ -62,16 +57,49 @@
 
 	      \end{answer}
 
-	\item A mathematical expression that describes a point on a cubic Bezier curve as a product of vector(s) and matrice(s).
+	\item A mathematical expression that describes a point on a cubic B\'{e}zier curve as a product of vector(s) and matrice(s).
 
 	      \begin{answer}
+	      	\begin{align*}
+	      		\begin{matrix}
+	      		\begin{bmatrix}
+	      		1  & t  & t^2 & t^3
+	      		\end{bmatrix} \\
+	      		\mbox{} \\
+	      		\mbox{} \\
+	      		\mbox{}
+	      		\end{matrix}
+	      		\begin{bmatrix}
+	      		  & 1  & 0  & 0  & 0 \\
+	      		  & -3 & 3  & 0  & 0 \\
+	      		  & 3  & -6 & 3  & 0 \\
+	      		  & -1 & 3  & -3 & 1
+	      		\end{bmatrix}
+	      		\begin{bmatrix}
+	      		p_0 \\
+	      		p_1 \\
+	      		p_2 \\
+	      		p_3
+	      		\end{bmatrix}
+	      		& = P(t)
+	      	\end{align*}
 
+	      	Where $p_0, p_1, p_2$ and $p_3$ are the 4 control points
 	      \end{answer}
 
 	\item A matrix that describes a perspective transformation.
 
 	      \begin{answer}
+	      	\begin{align*}
+	      		\begin{bmatrix}
+	      		  & \frac{2n}{r-l} & 0              & \frac{r+l}{r-l}  & 0                \\
+	      		  & 0              & \frac{2n}{t-b} & \frac{t+b}{t-b}  & 0                \\
+	      		  & 0              & 0              & -\frac{f+n}{f-n} & -\frac{2fn}{f-n} \\
+	      		  & 0              & 0              & -1               & 0
+	      		\end{bmatrix}
+	      	\end{align*}
 
+	      	Where $f$ stands for far value, $n$ stands for near value, $t$ stands for top, $b$ stands for bottom, $r$ stands for left and $l$ stands for right.
 	      \end{answer}
 
 	\item An image from a program that you write. This program will produce an image of one of the American manned spacecraft of the 1960s and 1970s. Begin by modelling a vehicle with cylinders and cones, then elaborate. Add more details to the vehicle, a background that might include planets and stars, or add animation.
