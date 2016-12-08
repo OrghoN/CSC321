@@ -4,25 +4,7 @@
 \date{09 December 2016}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage{listings}
-\lstset{language=java}
-\lstset{morekeywords={
-    arguments,
-    debugger,
-    delete,
-    eval,
-    export,
-    false,
-    function,
-    in,
-    let,
-    null,
-    true,
-    typeof,
-    var,
-    with,
-    yield}}
-\lstset{deletekeywords={assert, strictfp}}
+\usepackage{minted}
 \usepackage[colorlinks=true]{hyperref}
 
 \newenvironment{answer}
@@ -36,19 +18,19 @@
 	\item A function of two variables, each of which takes a value in the interval [0,1], that returns a vector that describes a point on a cylinder (but not on the cylinder's circular end caps).
 
 	      \begin{answer}
-
+	      	\inputminted[firstline=1, lastline=9]{js}{exercise-1.js}
 	      \end{answer}
 
 	\item A function of two variables, each of which takes a value in the interval [0,1], that returns a vector that describes a point on a cone (but not on the cone's circular base).
 
 	      \begin{answer}
-
+	      	\inputminted[firstline=11, lastline=19]{js}{exercise-1.js}
 	      \end{answer}
 
 	\item A function of two variables, each of which takes a value in the interval [0,1], that returns a vector that describes a point on a sphere.
 
 	      \begin{answer}
-
+	      	\inputminted[firstline=21, lastline=29]{js}{exercise-1.js}
 	      \end{answer}
 
 	\item A mathematical expression that describes the brightness of a small patch of a surface. The expression should contain terms that model ambient lighting, diffuse reflection, and specular reflection. It should show the role of a vector that is perpendicular to the surface, a vector that points to the source of light, and a vector that points to the eye of the viewer in the calculation of these several components of the surface's illumination.

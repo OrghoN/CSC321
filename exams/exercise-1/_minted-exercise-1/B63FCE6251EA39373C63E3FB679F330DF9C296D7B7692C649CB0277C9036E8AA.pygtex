@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{function} \PYG{n+nx}{cylinder}\PYG{p}{(}\PYG{n+nx}{u}\PYG{p}{,} \PYG{n+nx}{v}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k+kd}{var} \PYG{n+nx}{radius} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{c+c1}{//radius}
+    \PYG{k+kd}{var} \PYG{n+nx}{height} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{c+c1}{//max height}
+    \PYG{k+kd}{var} \PYG{n+nx}{angle} \PYG{o}{=} \PYG{n+nx}{v} \PYG{o}{*} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{PI}\PYG{p}{;} \PYG{c+c1}{//scaling v to angle}
+    \PYG{k+kd}{var} \PYG{n+nx}{x} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{cos}\PYG{p}{(}\PYG{n+nx}{angle}\PYG{p}{);}
+    \PYG{k+kd}{var} \PYG{n+nx}{y} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{sin}\PYG{p}{(}\PYG{n+nx}{angle}\PYG{p}{);}
+    \PYG{k+kd}{var} \PYG{n+nx}{z} \PYG{o}{=} \PYG{n+nx}{u} \PYG{o}{*} \PYG{n+nx}{height}\PYG{p}{;} \PYG{c+c1}{//scaling u to height}
+    \PYG{k}{return} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{Vector3}\PYG{p}{(}\PYG{n+nx}{x}\PYG{p}{,} \PYG{n+nx}{y}\PYG{p}{,} \PYG{n+nx}{z}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{function} \PYG{n+nx}{cone}\PYG{p}{(}\PYG{n+nx}{u}\PYG{p}{,} \PYG{n+nx}{v}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k+kd}{var} \PYG{n+nx}{radius} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{c+c1}{//max radius}
+    \PYG{k+kd}{var} \PYG{n+nx}{height} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k+kd}{var} \PYG{n+nx}{angle} \PYG{o}{=} \PYG{n+nx}{v} \PYG{o}{*} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{PI}\PYG{p}{;} \PYG{c+c1}{//scaling v to angle}
+    \PYG{k+kd}{var} \PYG{n+nx}{x} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nx}{u} \PYG{o}{*} \PYG{n+nx}{height} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{cos}\PYG{p}{(}\PYG{n+nx}{angle}\PYG{p}{);} \PYG{c+c1}{//scaling u to height}
+    \PYG{k+kd}{var} \PYG{n+nx}{y} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nx}{u} \PYG{o}{*} \PYG{n+nx}{height} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{sin}\PYG{p}{(}\PYG{n+nx}{angle}\PYG{p}{);} \PYG{c+c1}{//scaling u to height}
+    \PYG{k+kd}{var} \PYG{n+nx}{z} \PYG{o}{=} \PYG{n+nx}{height} \PYG{o}{*} \PYG{n+nx}{u}\PYG{p}{;} \PYG{c+c1}{//scaling u to height}
+    \PYG{k}{return} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{Vector3}\PYG{p}{(}\PYG{n+nx}{x}\PYG{p}{,} \PYG{n+nx}{y}\PYG{p}{,} \PYG{n+nx}{z}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{function} \PYG{n+nx}{cylinder}\PYG{p}{(}\PYG{n+nx}{u}\PYG{p}{,} \PYG{n+nx}{v}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k+kd}{var} \PYG{n+nx}{radius} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k+kd}{var} \PYG{n+nx}{angle2} \PYG{o}{=} \PYG{n+nx}{u} \PYG{o}{*} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{PI}\PYG{p}{;} \PYG{c+c1}{//scaling u to angle}
+    \PYG{k+kd}{var} \PYG{n+nx}{angle1} \PYG{o}{=} \PYG{n+nx}{v} \PYG{o}{*} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{PI}\PYG{p}{;} \PYG{c+c1}{//scaling v to angle}
+    \PYG{k+kd}{var} \PYG{n+nx}{x} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{cos}\PYG{p}{(}\PYG{n+nx}{angle2}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{sin}\PYG{p}{(}\PYG{n+nx}{angle1}\PYG{p}{);}
+    \PYG{k+kd}{var} \PYG{n+nx}{y} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{sin}\PYG{p}{(}\PYG{n+nx}{angle2}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{sin}\PYG{p}{(}\PYG{n+nx}{angle1}\PYG{p}{);}
+    \PYG{k+kd}{var} \PYG{n+nx}{z} \PYG{o}{=} \PYG{n+nx}{radius} \PYG{o}{*} \PYG{n+nb}{Math}\PYG{p}{.}\PYG{n+nx}{cos}\PYG{p}{(}\PYG{n+nx}{angle2}\PYG{p}{);}
+    \PYG{k}{return} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{Vector3}\PYG{p}{(}\PYG{n+nx}{x}\PYG{p}{,} \PYG{n+nx}{y}\PYG{p}{,} \PYG{n+nx}{z}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
