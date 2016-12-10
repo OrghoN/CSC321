@@ -37,7 +37,25 @@
 	\item A mathematical expression that describes the brightness of a small patch of a surface. The expression should contain terms that model ambient lighting, diffuse reflection, and specular reflection. It should show the role of a vector that is perpendicular to the surface, a vector that points to the source of light, and a vector that points to the eye of the viewer in the calculation of these several components of the surface's illumination.
 
 	      \begin{answer}
+	      	$$I_p = k_a i_a + \sum_{m\in lights} (k_d (\hat{L}_m \cdot \hat{N}) i_{m,d} + k_s (\hat{R}_m \cdot \hat{V})^{\alpha}i_{m,s})$$
 
+	      	$k_s$ is specular reflection constant.
+
+	      	$k_d$ is diffuse reflection constant.
+
+	      	$k_a$ is  ambient reflection constant.
+
+	      	$\alpha$ is ''shininess'' constant for this material
+
+	      	$lights$ is the set of all light sources
+
+	      	$\hat{L}_m$ is the direction vector from the point to light source specified by $m$
+
+	      	$\hat{N}$ is the normal vector
+
+	      	$\hat{R}_m$ is the direction of a perfectly reflected ray of light
+
+	      	$\hat{V}$ is the direction towards the viewer
 	      \end{answer}
 
 	\item A mathematical expression that describes a point on a cubic B\'{e}zier curve as a product of vector(s) and matrice(s).

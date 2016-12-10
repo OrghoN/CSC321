@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.7)  8 DEC 2016 13:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.7)  9 DEC 2016 20:46
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -433,10 +433,6 @@ LaTeX Info: Redefining \nameref on input line 15.
 \@outlinefile=\write6
 \openout6 = `exercise-1.out'.
 
-runsystem(pygmentize -l js -f latex -P commandprefix=PYG -F tokenmerge -o "_min
-ted-exercise-1/7EC9ECFF7329678CB83D9716F7FE29E8F9C296D7B7692C649CB0277C9036E8AA
-.pygtex" "exercise-1.js" )...executed.
-
 
 (./_minted-exercise-1/7EC9ECFF7329678CB83D9716F7FE29E8F9C296D7B7692C649CB0277C9
 036E8AA.pygtex
@@ -468,41 +464,38 @@ Overfull \hbox (21.43309pt too wide) in paragraph at lines 39--40
  []
 
 
-Overfull \hbox (21.43309pt too wide) in paragraph at lines 45--46
-[][]
- []
-
-
-Overfull \hbox (21.43309pt too wide) in paragraph at lines 75--76
+Overfull \hbox (21.43309pt too wide) in paragraph at lines 63--64
 [][]
  []
 
 [2]
-Overfull \hbox (21.43309pt too wide) in paragraph at lines 90--91
+Overfull \hbox (21.43309pt too wide) in paragraph at lines 93--94
 [][]
  []
 
 
-Overfull \hbox (21.43309pt too wide) in paragraph at lines 96--97
+Overfull \hbox (21.43309pt too wide) in paragraph at lines 108--109
 [][]
  []
 
-runsystem(rm "_minted-exercise-1/B63FCE6251EA39373C63E3FB679F330DF9C296D7B7692C
-649CB0277C9036E8AA.pygtex")...executed.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 102.
+Overfull \hbox (21.43309pt too wide) in paragraph at lines 114--115
+[][]
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 120.
 [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 102.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 120.
  (./exercise-1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 102.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 102.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 120.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 120.
 Package rerunfilecheck Info: File `exercise-1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 8650 strings out of 493029
- 135826 string characters out of 6136234
- 271327 words of memory out of 5000000
+ 8649 strings out of 493029
+ 135762 string characters out of 6136234
+ 270327 words of memory out of 5000000
  12056 multiletter control sequences out of 15000+600000
  8139 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -518,7 +511,7 @@ public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt10.pfb>
-Output written on exercise-1.pdf (3 pages, 111629 bytes).
+Output written on exercise-1.pdf (3 pages, 118659 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
