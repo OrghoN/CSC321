@@ -1,113 +1,64 @@
-// once everything is loaded, we run our Three.js stuff.
-function init() {
+loader = new THREE.TextureLoader;
+starsTex = loader.load('images/galaxy_starfield.png');
 
-    // create a scene, that will hold all our elements such as objects, cameras and lights.
-    var scene = new THREE.Scene();
+// Setup a new scene
+var scene = new THREE.Scene();
 
-    // create a camera, which defines where we're looking at.
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    // create a render and set the size
-    var webGLRenderer = new THREE.WebGLRenderer();
-    webGLRenderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
-    webGLRenderer.setSize(window.innerWidth, window.innerHeight);
-    webGLRenderer.shadowMapEnabled = true;
-
-    // position and point the camera to the center of the scene
-    camera.position.x = -30;
-    camera.position.y = 40;
-    camera.position.z = 50;
-    camera.lookAt(new THREE.Vector3(10, 0, 0));
-
-    // add the output of the renderer to the html element
-    document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
-
-    // call the render function
-    var step = 0;
-
-    // the points group
-    var spGroup;
-    // the mesh
-    var latheMesh;
-
-    generatePoints(12, 2, 2 * Math.PI);
-
-    // setup the control gui
-    var controls = new function () {
-        // we need the first child, since it's a multimaterial
-
-        this.segments = 12;
-        this.phiStart = 0;
-        this.phiLength = 2 * Math.PI;
-
-        this.redraw = function () {
-            scene.remove(spGroup);
-            scene.remove(latheMesh);
-            generatePoints(controls.segments, controls.phiStart, controls.phiLength);
-        };
-    };
-
-    var gui = new dat.GUI();
-    gui.add(controls, 'segments', 0, 50).step(1).onChange(controls.redraw);
-    gui.add(controls, 'phiStart', 0, 2 * Math.PI).onChange(controls.redraw);
-    gui.add(controls, 'phiLength', 0, 2 * Math.PI).onChange(controls.redraw);
+// Setup the camera
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.y = -5;
+camera.position.z = 8;
+// camera.position.x = 5;
 
 
-    render();
-
-    function generatePoints(segments, phiStart, phiLength) {
-        // add 10 random spheres
-        var points = [];
-        var height = 5;
-        var count = 30;
-        for (var i = 0; i < count; i++) {
-            points.push(new THREE.Vector3((Math.sin(i * 0.2) + Math.cos(i * 0.3)) * height + 12, 0, ( i - count ) + count / 2));
-        }
-
-        spGroup = new THREE.Object3D();
-        var material = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: false});
-        points.forEach(function (point) {
-
-            var spGeom = new THREE.SphereGeometry(0.2);
-            var spMesh = new THREE.Mesh(spGeom, material);
-            spMesh.position.copy(point);
-            spGroup.add(spMesh);
-        });
-        // add the points as a group to the scene
-        scene.add(spGroup);
-
-        // use the same points to create a LatheGeometry
-        var latheGeometry = new THREE.LatheGeometry(points, segments, phiStart, phiLength);
-        latheMesh = createMesh(latheGeometry);
-
-        scene.add(latheMesh);
-    }
-
-    function createMesh(geom) {
-
-        // assign two materials
-        //  var meshMaterial = new THREE.MeshBasicMaterial({color:0x00ff00, transparent:true, opacity:0.6});
-        var meshMaterial = new THREE.MeshNormalMaterial();
-        meshMaterial.side = THREE.DoubleSide;
-        var wireFrameMat = new THREE.MeshBasicMaterial();
-        wireFrameMat.wireframe = true;
-
-        // create a multimaterial
-        var mesh = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial, wireFrameMat]);
-
-        return mesh;
-    }
-
-    function render() {
-
-        spGroup.rotation.x = step;
-        latheMesh.rotation.x = step += 0.01;
-
-        // render using requestAnimationFrame
-        requestAnimationFrame(render);
-        webGLRenderer.render(scene, camera);
-    }
+// Setup the renderer
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
 
+// Add the lights
+var ambientLight = new THREE.AmbientLight(0x111111);
+scene.add(ambientLight);
+
+var light = new THREE.PointLight(0xFFFFDD);
+light.position.set(-15, 10, 15);
+scene.add(light);
+
+var stars = createStars(90, 64);
+scene.add(stars);
+
+// Load the JSON files and provide callback functions (modelToScene
+var loader = new THREE.JSONLoader();
+loader.load("1.json", addModelToScene);
+loader.load("2.json", addModelToScene);
+loader.load("4.json", addModelToScene);
+
+
+// After loading JSON from our file, we add it to the scene
+function addModelToScene(geometry, materials) {
+    var material = new THREE.MeshFaceMaterial(materials);
+    model = new THREE.Mesh(geometry, material);
+    //  model.scale.set(5,5,5);
+    scene.add(model);
+    // camera.lookAt(model.position);
 }
-window.onload = init;
+
+function createStars(radius, segments) {
+    return new THREE.Mesh(
+        new THREE.SphereGeometry(radius, segments, segments),
+        new THREE.MeshBasicMaterial({
+            map: starsTex,
+            side: THREE.BackSide
+        })
+    );
+}
+
+// Render loop to rotate our sphere by a little bit each frame
+var render = function() {
+    requestAnimationFrame(render);
+
+    renderer.render(scene, camera);
+};
+
+render();

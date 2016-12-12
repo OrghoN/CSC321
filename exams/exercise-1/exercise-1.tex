@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{minted}
+\usepackage{float}
 \usemintedstyle{emacs}
 \usepackage[colorlinks=true]{hyperref}
 
@@ -107,13 +108,24 @@
 
 	      \begin{answer}
 
+	      	See this image~\ref{rocket}:
+
 	      \end{answer}
 
 	\item An excerpt from your program that shows us some key feature of the program. This might be a loop, the definition of a function, a call to a function, an assignment state that contains on its right hand side a key expression, or something else.
 
 	      \begin{answer}
-
+	      	\inputminted[firstline=31, lastline=55]{js}{spaceship/scripts/main.js}
 	      \end{answer}
+
+
+	      \begin{figure}[b!]
+	      	\begin{center}
+	      		\label{rocket}
+	      		\includegraphics[width=\linewidth]{shitty-rocket}
+	      	\end{center}
+	      	\caption{Rocket}
+	      \end{figure}
 
 \end{enumerate}
 

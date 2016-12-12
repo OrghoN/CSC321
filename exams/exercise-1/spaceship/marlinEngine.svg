@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2.9646297in"
+   height="14.879175in"
+   viewBox="0 0 213.45327 1071.3014"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="marlinEngine.svg">
+  <metadata
+     id="metadata9">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1857"
+     inkscape:window-height="1056"
+     id="namedview5"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.057843178"
+     inkscape:cx="-152.99815"
+     inkscape:cy="863.48917"
+     inkscape:window-x="63"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <path
+     id="engine"
+     d="m 18.100033,0.00943228 c 0,0 -0.25,13.24999972 -0.25,13.24999972 0,0 1.25,5.5 5.25,10 4,4.5 13,12 13,12 0,0 8.25,6.75 8.25,6.75 0,0 14.75,16 20,30.75 5.25,14.75 1.75,24.25 1.75,24.25 0,0 6.75,4.749998 7,10.999998 0.25,6.25 -0.25,16.25 -0.25,16.25 0,0 -5.75,8.5 -5.75,3.75 0,-4.75 -0.5,13.75 -0.5,13.75 0,0 0,108.5 0,108.5 0,0 2.5,2.5 2.5,2.5 0,0 0.5,5.5 0.5,5.5 0,0 -2.75,-0.25 -2.75,-0.25 0,0 0.75,13.25 0.75,13.25 0,0 3.5,3.75 3.5,3.75 0,0 0.5,19.75 0.5,19.75 0,0 -4.75,5 -4.75,5 0,0 -3.25,5.25 -3.75,10.75 -0.5,5.5 -2.5,13.75 -2.5,13.75 0,0 -16,31 -17.25,30.25 -1.25,-0.75 1.5,3 1.5,3 0,0 -29.5,46.5 -28.25,48.5 1.25,2 0.5,9.25 0.5,9.25 0,0 -12.75,20.25 -12.75,20.25 0,0 4.75,7 1,6.75 -3.75,-0.25 -4.74999998,12 -4.74999998,12 0,0 3.99999998,0.25 4.74999998,1 0.75,0.75 -1.25,3.25 -4.49999998,5.25 -3.25000002,2 17.24999998,26 13.49999998,27 -3.75,1 4.5,2.25 6,6.5 1.5,4.25 7,31.75 21.75,50.75 14.75,19 35,70 36.75,74.25 1.75,4.25 4.75,9.75 4.75,9.75 0,0 40.999997,1.5 40.999997,1.5 0,0 15.75,4 16.25,24.75 0.5,20.75 -36.25,19.5 -35.75,20 0.5,0.5 -2.5,-4 3.5,12.5 6,16.5 30.25,78.25 27.25,78.5 -3,0.25 40.5,122 37.5,125.5 -3,3.5 48.5,165.24997 38.25,179.49997"
+     inkscape:connector-curvature="0"
+     style="fill:none;stroke:#000000;stroke-width:1" />
+</svg>

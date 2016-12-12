@@ -68,6 +68,7 @@ function init() {
 
     var controls = new THREE.TrackballControls(camera, renderer.domElement);
 
+
     document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
     function render() {

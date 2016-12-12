@@ -1,0 +1,66 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{loader} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{TextureLoader}\PYG{p}{;}
+\PYG{n+nx}{starsTex} \PYG{o}{=} \PYG{n+nx}{loader}\PYG{p}{.}\PYG{n+nx}{load}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}images/galaxy\PYGZus{}starfield.png\PYGZsq{}}\PYG{p}{);}
+
+\PYG{c+c1}{// Setup a new scene}
+\PYG{k+kd}{var} \PYG{n+nx}{scene} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{Scene}\PYG{p}{();}
+
+\PYG{c+c1}{// Setup the camera}
+\PYG{k+kd}{var} \PYG{n+nx}{camera} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{PerspectiveCamera}\PYG{p}{(}\PYG{l+m+mi}{75}\PYG{p}{,} \PYG{n+nb}{window}\PYG{p}{.}\PYG{n+nx}{innerWidth} \PYG{o}{/} \PYG{n+nb}{window}\PYG{p}{.}\PYG{n+nx}{innerHeight}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{);}
+\PYG{n+nx}{camera}\PYG{p}{.}\PYG{n+nx}{position}\PYG{p}{.}\PYG{n+nx}{y} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{n+nx}{camera}\PYG{p}{.}\PYG{n+nx}{position}\PYG{p}{.}\PYG{n+nx}{z} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{;}
+\PYG{c+c1}{// camera.position.x = 5;}
+
+
+\PYG{c+c1}{// Setup the renderer}
+\PYG{k+kd}{var} \PYG{n+nx}{renderer} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{WebGLRenderer}\PYG{p}{();}
+\PYG{n+nx}{renderer}\PYG{p}{.}\PYG{n+nx}{setSize}\PYG{p}{(}\PYG{n+nb}{window}\PYG{p}{.}\PYG{n+nx}{innerWidth}\PYG{p}{,} \PYG{n+nb}{window}\PYG{p}{.}\PYG{n+nx}{innerHeight}\PYG{p}{);}
+\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{body}\PYG{p}{.}\PYG{n+nx}{appendChild}\PYG{p}{(}\PYG{n+nx}{renderer}\PYG{p}{.}\PYG{n+nx}{domElement}\PYG{p}{);}
+
+
+\PYG{c+c1}{// Add the lights}
+\PYG{k+kd}{var} \PYG{n+nx}{ambientLight} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{AmbientLight}\PYG{p}{(}\PYG{l+m+mh}{0x111111}\PYG{p}{);}
+\PYG{n+nx}{scene}\PYG{p}{.}\PYG{n+nx}{add}\PYG{p}{(}\PYG{n+nx}{ambientLight}\PYG{p}{);}
+
+\PYG{k+kd}{var} \PYG{n+nx}{light} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{PointLight}\PYG{p}{(}\PYG{l+m+mh}{0xFFFFDD}\PYG{p}{);}
+\PYG{n+nx}{light}\PYG{p}{.}\PYG{n+nx}{position}\PYG{p}{.}\PYG{n+nx}{set}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{15}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{15}\PYG{p}{);}
+\PYG{n+nx}{scene}\PYG{p}{.}\PYG{n+nx}{add}\PYG{p}{(}\PYG{n+nx}{light}\PYG{p}{);}
+
+\PYG{k+kd}{var} \PYG{n+nx}{stars} \PYG{o}{=} \PYG{n+nx}{createStars}\PYG{p}{(}\PYG{l+m+mi}{90}\PYG{p}{,} \PYG{l+m+mi}{64}\PYG{p}{);}
+\PYG{n+nx}{scene}\PYG{p}{.}\PYG{n+nx}{add}\PYG{p}{(}\PYG{n+nx}{stars}\PYG{p}{);}
+
+\PYG{c+c1}{// Load the JSON files and provide callback functions (modelToScene}
+\PYG{k+kd}{var} \PYG{n+nx}{loader} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{JSONLoader}\PYG{p}{();}
+\PYG{n+nx}{loader}\PYG{p}{.}\PYG{n+nx}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}1.json\PYGZdq{}}\PYG{p}{,} \PYG{n+nx}{addModelToScene}\PYG{p}{);}
+\PYG{n+nx}{loader}\PYG{p}{.}\PYG{n+nx}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}2.json\PYGZdq{}}\PYG{p}{,} \PYG{n+nx}{addModelToScene}\PYG{p}{);}
+\PYG{n+nx}{loader}\PYG{p}{.}\PYG{n+nx}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}4.json\PYGZdq{}}\PYG{p}{,} \PYG{n+nx}{addModelToScene}\PYG{p}{);}
+
+
+\PYG{c+c1}{// After loading JSON from our file, we add it to the scene}
+\PYG{k+kd}{function} \PYG{n+nx}{addModelToScene}\PYG{p}{(}\PYG{n+nx}{geometry}\PYG{p}{,} \PYG{n+nx}{materials}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k+kd}{var} \PYG{n+nx}{material} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{MeshFaceMaterial}\PYG{p}{(}\PYG{n+nx}{materials}\PYG{p}{);}
+    \PYG{n+nx}{model} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{Mesh}\PYG{p}{(}\PYG{n+nx}{geometry}\PYG{p}{,} \PYG{n+nx}{material}\PYG{p}{);}
+    \PYG{c+c1}{//  model.scale.set(5,5,5);}
+    \PYG{n+nx}{scene}\PYG{p}{.}\PYG{n+nx}{add}\PYG{p}{(}\PYG{n+nx}{model}\PYG{p}{);}
+    \PYG{c+c1}{// camera.lookAt(model.position);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{function} \PYG{n+nx}{createStars}\PYG{p}{(}\PYG{n+nx}{radius}\PYG{p}{,} \PYG{n+nx}{segments}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k}{return} \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{Mesh}\PYG{p}{(}
+        \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{SphereGeometry}\PYG{p}{(}\PYG{n+nx}{radius}\PYG{p}{,} \PYG{n+nx}{segments}\PYG{p}{,} \PYG{n+nx}{segments}\PYG{p}{),}
+        \PYG{k}{new} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{MeshBasicMaterial}\PYG{p}{(\PYGZob{}}
+            \PYG{n+nx}{map}\PYG{o}{:} \PYG{n+nx}{starsTex}\PYG{p}{,}
+            \PYG{n+nx}{side}\PYG{o}{:} \PYG{n+nx}{THREE}\PYG{p}{.}\PYG{n+nx}{BackSide}
+        \PYG{p}{\PYGZcb{})}
+    \PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{// Render loop to rotate our sphere by a little bit each frame}
+\PYG{k+kd}{var} \PYG{n+nx}{render} \PYG{o}{=} \PYG{k+kd}{function}\PYG{p}{()} \PYG{p}{\PYGZob{}}
+    \PYG{n+nx}{requestAnimationFrame}\PYG{p}{(}\PYG{n+nx}{render}\PYG{p}{);}
+
+    \PYG{n+nx}{renderer}\PYG{p}{.}\PYG{n+nx}{render}\PYG{p}{(}\PYG{n+nx}{scene}\PYG{p}{,} \PYG{n+nx}{camera}\PYG{p}{);}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n+nx}{render}\PYG{p}{();}
+\end{Verbatim}
