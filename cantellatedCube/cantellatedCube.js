@@ -124,15 +124,80 @@ function cantCube(s) {
     return RCOH;
 }
 
-var orgho = [];
-var i, j, k;
-for (i = -1; i < 2; i += 2) {
-    for (j = -1; j < 2; j += 2) {
-        for (k = -(1 + Math.sqrt(2)); k < 3; k += (2 * (1 + Math.sqrt(2)))) {
-            orgho.push([i,j,k]);
-            }
-        }
-    }
+function makeCube(s) {
+    var cube = new THREE.Geometry();
+    var points = [];
+    var cp = Combinatorics.cartesianProduct([-0.5, +0.5], [-0.5, 0.5], [-0.5, 0.5]).toArray();
 
-console.log(orgho.length);
-console.log(JSON.stringify(orgho));
+    cp.forEach(function(vertex, i) {
+        cube.vertices.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+        points.push(i);
+    });
+
+    faces = Combinatorics.permutation(points, 3).toArray();
+    faces.forEach(function(face) {
+        cube.faces.push(new THREE.Face3(face[0], face[1], face[2]));
+    });
+
+    cube.computeFaceNormals();
+    return cube;
+
+}
+
+function makeIsocahedron(s) {
+    var isocahedron = new THREE.Geometry();
+    var points = [];
+    var vertices = [];
+
+    var cp = Combinatorics.cartesianProduct([0, -0], [math.phi / 2, -math.phi / 2], [0.5, -0.5]).toArray();
+    vertices.push(cp);
+    cp = Combinatorics.cartesianProduct([math.phi / 2, -math.phi / 2], [0.5, -0.5], [0, -0]).toArray();
+    vertices.push(cp);
+    cp = Combinatorics.cartesianProduct([0.5, -0.5], [0, -0], [math.phi / 2, -math.phi / 2]).toArray();
+    vertices.push(cp);
+
+    var vertices = vertices.reduce(function(a, b) {
+        return a.concat(b);
+    }, []);
+
+    console.log(vertices);
+
+    vertices.forEach(function(vertex, i) {
+        isocahedron.vertices.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+        points.push(i);
+    });
+
+    faces = Combinatorics.permutation(points, 3).toArray();
+    faces.forEach(function(face) {
+        isocahedron.faces.push(new THREE.Face3(face[0], face[1], face[2]));
+    });
+
+    isocahedron.computeFaceNormals();
+    return isocahedron;
+}
+
+function makeArchimedianSolid(s, constraints) {
+    var solid = new THREE.Geometry();
+
+    var points = [];
+    var vertices = [];
+
+    var temp;
+
+    constraints.forEach(function(constraint) {
+        temp = Combinatorics.cartesianProduct([constraint[0], -constraint[0]], [constraint[1], -constraint[1]], [constraint[2], -constraint[2]])
+        vertices.push(temp);
+    });
+
+    vertices = vertices.reduce(function(a, b) {
+        return a.concat(b);
+    }, []);
+
+    vertices.forEach(function(vertex, i){
+      solid.vertices.push((new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+      points.push(i);
+    });
+
+    
+
+}
