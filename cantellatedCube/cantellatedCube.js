@@ -4,13 +4,13 @@ function cantCube(s) {
   // x/y/z offset distance from 'neighbor' vertex on a cube
   // this explanation sucks, I know, but better to calculate
   // this value once rather than dozens of times
-  
+
   //var n = s/3;
-  var n = s / (3* Math.sqrt(2) );
+  var n = s / (2 + Math.sqrt(2) );
 
   // Final geometry.  RhombiCuboOctaHedron, 'Rico'
   var RCOH = new THREE.Geometry();
-  
+
   // Note clockwise, bottom-to-top organization
   // Generate vertices
     // Bottom 4
@@ -123,4 +123,3 @@ function cantCube(s) {
 
   return RCOH;
 }
-
