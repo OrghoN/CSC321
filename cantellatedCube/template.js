@@ -98,7 +98,7 @@
         directionalLight0.shadeCameraBottom = -100;
 
         scene.add(directionalLight0);
-	
+
         var directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
         directionalLight1.castShadow = true;
         directionalLight1.target = origin;
@@ -113,19 +113,19 @@
 
         scene.add(directionalLight1);
 
-        var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight2.castShadow = true;
-        directionalLight2.target = origin;
-        directionalLight2.position.set( 80, 40, 60 );
-
-        directionalLight2.shadeCameraNear = 100;
-        directionalLight2.shadeCameraFar = -100;
-        directionalLight2.shadeCameraLeft = -100;
-        directionalLight2.shadeCameraRight = 100;
-        directionalLight2.shadeCameraTop = 100;
-        directionalLight2.shadeCameraBottom = -100;
-
-        scene.add(directionalLight2);
+        // var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+        // directionalLight2.castShadow = true;
+        // directionalLight2.target = origin;
+        // directionalLight2.position.set( 80, 40, 60 );
+        //
+        // directionalLight2.shadeCameraNear = 100;
+        // directionalLight2.shadeCameraFar = -100;
+        // directionalLight2.shadeCameraLeft = -100;
+        // directionalLight2.shadeCameraRight = 100;
+        // directionalLight2.shadeCameraTop = 100;
+        // directionalLight2.shadeCameraBottom = -100;
+        //
+        // scene.add(directionalLight2);
     }; // addLights()
 
 
@@ -145,16 +145,16 @@
         makeResizable( camera, renderer );
 
         addLights( scene, origin );
-	
+
         // add the output of the renderer to the html element
         document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
-        var sphereMaterial = new THREE.MeshLambertMaterial( {color: 0x66CCEE} );
-        var sphereGeometry = new THREE.SphereGeometry( 20, 64, 64 );
-        var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+        var cantellatedCubeMaterial = new THREE.MeshPhongMaterial( {color: 0x66CCEE} );
+        var cantellatedCubeGeometry = cantCube(20);
+        var cantellatedCube = new THREE.Mesh( cantellatedCubeGeometry, cantellatedCubeMaterial );
 
-        scene.add( sphere );
- 
+        scene.add( cantellatedCube );
+
         var render = function() {
             var delta = clock.getDelta();
             orbitControls.update(delta);
