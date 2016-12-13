@@ -79,12 +79,23 @@ function makeIsocahedron(s) {
 }
 
 function makeDodecahedron(s) {
-    var constrains = [
-        [math.phi / 2, math.phi / 2, math.phi / 2],
-        [.5, (math.phi + 1) / 2, 0],
-        [0.5, 0, 0.5],
-        [0, 0.5, (math.phi + 1) / 2]
+    var constraints = [
+        // [math.phi / 2, math.phi / 2, math.phi / 2],
+        // [math.phi / 2, math.phi / 2, math.phi / 2],
+        // [0.5, (math.phi * math.phi) / 2, 0],
+        // [(math.phi * math.phi) / 2, 0, 0.5],
+        // [0, 0.5, (math.phi * math.phi) / 2]
+        [(math.phi ^ 3) / 2, 0.5, 0.5],
+        [0.5, (math.phi ^ 3) / 2, 0.5],
+        [0.5, 0.5, (math.phi ^ 3) / 2],
+        [(math.phi ^ 2) / 2, (math.phi) / 2, math.phi],
+        [(math.phi) / 2, math.phi, (math.phi ^ 2) / 2],
+        [(math.phi), (math.phi ^ 2) / 2, (math.phi) / 2],
+        [(math.phi ^ 2) / 2, ((math.phi ^ 2) + 1) / 2, 0],
+        [((math.phi ^ 2) + 1) / 2, 0, (math.phi ^ 2) / 2],
+        [0, (math.phi ^ 2) / 2, ((math.phi ^ 2) + 1) / 2]
     ];
+
     return makeArchimedianSolid(s, constraints);
 }
 
@@ -114,6 +125,9 @@ function makeArchimedianSolid(s, constraints) {
     faces.forEach(function(face) {
         solid.faces.push(new THREE.Face3(face[0], face[1], face[2]));
     });
+
+    console.log("vertices: " + solid.vertices.length);
+    console.log("faces: " + solid.faces.length);
 
     solid.computeFaceNormals();
 

@@ -161,7 +161,7 @@ var init = function() {
         // var cube = new THREE.Mesh(cubeGeometry, Material);
         // scene.add(cube);
 
-        var isocahedronGeometry = makeDodecahedron(20);
+        var isocahedronGeometry = makeIsocahedron(20);
         var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
         scene.add(isocahedron);
 
