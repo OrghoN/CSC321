@@ -101,37 +101,25 @@ function makeTruncatedCube(s) {
 }
 
 function makeTruncatedOctahedron(s) {
-    var constraints = [-1, 1, -2, 2, 0];
+    var constraints = [-1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2), (1 + 2 * Math.SQRT2), -(1 + 2 * Math.SQRT2)];
 
     return makeArchimedianSolid(s, constraints, true);
 }
 
+function makeTruncatedTetrahedron(s) {
+    var constraints = [-1, 1, -1, 1, 3, -3];
 
-function makeDodecahedron(s) {
-    var sigma = Math.SQRT2 - 1;
-    var constraints = [
-        // [math.phi / 2, math.phi / 2, math.phi / 2],
-        // [math.phi / 2, math.phi / 2, math.phi / 2],
-        // [0.5, (math.phi * math.phi) / 2, 0],
-        // [(math.phi * math.phi) / 2, 0, 0.5],
-        // [0, 0.5, (math.phi * math.phi) / 2]
+    return makeArchimedianSolid(s, constraints, true);
+}
 
-        // [(math.phi ^ 3) / 2, 0.5, 0.5],
-        // [0.5, (math.phi ^ 3) / 2, 0.5],
-        // [0.5, 0.5, (math.phi ^ 3) / 2],
-        // [(math.phi ^ 2) / 2, (math.phi) / 2, math.phi],
-        // [(math.phi) / 2, math.phi, (math.phi ^ 2) / 2],
-        // [(math.phi), (math.phi ^ 2) / 2, (math.phi) / 2],
-        // [(math.phi ^ 2) / 2, ((math.phi ^ 2) + 1) / 2, 0],
-        // [((math.phi ^ 2) + 1) / 2, 0, (math.phi ^ 2) / 2],
-        // [0, (math.phi ^ 2) / 2, ((math.phi ^ 2) + 1) / 2]
-    ];
+function makeTruncatedDodecahedron(s) {
+    var constraints = [0, 1 / math.phi, 2 + math.phi, 1 / math.phi, math.phi, 2 * math.phi, math.phi, 2, math.phi + 1];
 
-    return makeArchimedianSolid(s, constraints);
+    return makeArchimedianSolid(s, constraints, true);
 }
 
 function makeArchimedianSolid(s, constraints, permute = false) {
-    var solid = new THREE.Geometry();
+    // var solid = new THREE.Geometry();
 
     var points = [];
     var vertices = [];
@@ -151,14 +139,10 @@ function makeArchimedianSolid(s, constraints, permute = false) {
     }
 
     vertices.forEach(function(vertex, i) {
-        solid.vertices.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
-        points.push(i);
+        points.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
     });
 
-    faces = Combinatorics.permutation(points, 3).toArray();
-    faces.forEach(function(face) {
-        solid.faces.push(new THREE.Face3(face[0], face[1], face[2]));
-    });
+    solid = new THREE.ConvexGeometry(points);
 
     console.log("vertices: " + solid.vertices.length);
     console.log("faces: " + solid.faces.length);
