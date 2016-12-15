@@ -47,20 +47,13 @@ function cantCube(s) {
     // RCOH.vertices.push(new THREE.Vector3(s - n, s, s - n));
     // RCOH.vertices.push(new THREE.Vector3(n, s, s - n));
 
-    var constraints = [-1, 1, -1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2)];
-    // var constraints = [-1, 1, -2, 2, 0];
+    // var constraints = [-1, 1, -1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2)];
 
-    var vertices = Combinatorics.permutation(constraints, 3).toArray();
     var points = [];
 
-    vertices.forEach(function(vertex, i) {
-        RCOH.vertices.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+    RCOH.vertices.forEach(function(point, i) {
         points.push(i);
     });
-
-    // RCOH.vertices.forEach(function(point, i) {
-    //     points.push(i);
-    // });
 
     faces = Combinatorics.permutation(points, 3).toArray();
     faces.forEach(function(face) {
@@ -101,13 +94,7 @@ function makeTruncatedCube(s) {
 }
 
 function makeTruncatedOctahedron(s) {
-    var constraints = [-1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2), (1 + 2 * Math.SQRT2), -(1 + 2 * Math.SQRT2)];
-
-    return makeArchimedianSolid(s, constraints, true);
-}
-
-function makeTruncatedTetrahedron(s) {
-    var constraints = [-1, 1, -1, 1, 3, -3];
+    var constraints = [-1, 1, -2, 2, 0];
 
     return makeArchimedianSolid(s, constraints, true);
 }
@@ -142,7 +129,11 @@ function makeArchimedianSolid(s, constraints, permute = false) {
         points.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
     });
 
+
     solid = new THREE.ConvexGeometry(points);
+
+    console.log(JSON.stringify(points));
+    console.log(JSON.stringify(solid.vertices));
 
     console.log("vertices: " + solid.vertices.length);
     console.log("faces: " + solid.faces.length);

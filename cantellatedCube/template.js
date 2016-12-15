@@ -161,9 +161,29 @@ var init = function() {
         // var cube = new THREE.Mesh(cubeGeometry, Material);
         // scene.add(cube);
 
-        var isocahedronGeometry = makeTruncatedCube(10);
+        // var isocahedronGeometry = makeTruncatedCube(10);
+        // var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
+        // scene.add(isocahedron);
+
+        // var cubeGeometry = makeCube(10);
+        // var cube = new THREE.Mesh(cubeGeometry, Material);
+        // cube.position.x = 30;
+        // scene.add(cube);
+        //
+        var isocahedronGeometry = makeIsocahedron(10);
         var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
+        // isocahedron.position.x = -30;
         scene.add(isocahedron);
+        //
+        // var truncatedCubeGeometry = makeTruncatedCube(10);
+        // var truncatedCube = new THREE.Mesh(truncatedCubeGeometry, Material);
+        // truncatedCube.position.y = 30;
+        // scene.add(truncatedCube);
+
+        // var truncatedOctahedronGeometry = makeTruncatedOctahedron(10);
+        // var truncatedOctahedron = new THREE.Mesh(truncatedOctahedronGeometry, Material);
+        // // truncatedOctahedron.position.y = -30;
+        // scene.add(truncatedOctahedron);
 
 
         var render = function() {
