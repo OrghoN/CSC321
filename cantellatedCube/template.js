@@ -153,37 +153,37 @@ var init = function() {
             color: 0x66CCEE
         });
 
-        // var cantellatedCubeGeometry = cantCube(3);
-        // var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
-        // scene.add( cantellatedCube );
+        var cantellatedCubeGeometry = cantCube(10);
+        var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
+        scene.add( cantellatedCube );
 
         // var cubeGeometry = makeCube(20);
         // var cube = new THREE.Mesh(cubeGeometry, Material);
         // scene.add(cube);
-
-        // var isocahedronGeometry = makeTruncatedCube(10);
-        // var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
-        // scene.add(isocahedron);
 
         // var cubeGeometry = makeCube(10);
         // var cube = new THREE.Mesh(cubeGeometry, Material);
         // cube.position.x = 30;
         // scene.add(cube);
         //
-        var isocahedronGeometry = makeIsocahedron(10);
-        var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
-        // isocahedron.position.x = -30;
-        scene.add(isocahedron);
+        // var isocahedronGeometry = makeIsocahedron(10);
+        // var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
+        // // isocahedron.position.x = -30;
+        // scene.add(isocahedron);
         //
         // var truncatedCubeGeometry = makeTruncatedCube(10);
         // var truncatedCube = new THREE.Mesh(truncatedCubeGeometry, Material);
-        // truncatedCube.position.y = 30;
+        // // truncatedCube.position.y = 30;
         // scene.add(truncatedCube);
 
         // var truncatedOctahedronGeometry = makeTruncatedOctahedron(10);
         // var truncatedOctahedron = new THREE.Mesh(truncatedOctahedronGeometry, Material);
         // // truncatedOctahedron.position.y = -30;
         // scene.add(truncatedOctahedron);
+
+        // var dodecahedronGeometry = makeTruncatedTetrahedron(3);
+        // var dodecahedron = new THREE.Mesh(dodecahedronGeometry, Material);
+        // scene.add(dodecahedron);
 
 
         var render = function() {

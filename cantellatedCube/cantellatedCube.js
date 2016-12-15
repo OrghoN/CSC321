@@ -9,58 +9,50 @@ function cantCube(s) {
     var n = s / (2 + Math.sqrt(2));
 
     // Final geometry.  RhombiCuboOctaHedron, 'Rico'
-    var RCOH = new THREE.Geometry();
-
+    var vertices = [];
     // Note clockwise, bottom-to-top organization
     // Generate vertices
     // Bottom 4
-    // RCOH.vertices.push(new THREE.Vector3(n, 0, n)); // v[0]
-    // RCOH.vertices.push(new THREE.Vector3(s - n, 0, n));
-    // RCOH.vertices.push(new THREE.Vector3(s - n, 0, s - n));
-    // RCOH.vertices.push(new THREE.Vector3(n, 0, s - n));
-    //
-    // // Bottom-middle 8-band
-    // RCOH.vertices.push(new THREE.Vector3(0, n, n)); // v[4]
-    // RCOH.vertices.push(new THREE.Vector3(n, n, 0));
-    // RCOH.vertices.push(new THREE.Vector3(s - n, n, 0));
-    // RCOH.vertices.push(new THREE.Vector3(s, n, n));
-    //
-    // RCOH.vertices.push(new THREE.Vector3(s, n, s - n)); // v[8]
-    // RCOH.vertices.push(new THREE.Vector3(s - n, n, s));
-    // RCOH.vertices.push(new THREE.Vector3(n, n, s));
-    // RCOH.vertices.push(new THREE.Vector3(0, n, s - n));
-    //
-    // // Top-middle 8-band
-    // RCOH.vertices.push(new THREE.Vector3(0, s - n, n)); // v[12]
-    // RCOH.vertices.push(new THREE.Vector3(n, s - n, 0));
-    // RCOH.vertices.push(new THREE.Vector3(s - n, s - n, 0));
-    // RCOH.vertices.push(new THREE.Vector3(s, s - n, n));
-    //
-    // RCOH.vertices.push(new THREE.Vector3(s, s - n, s - n)); // v[16]
-    // RCOH.vertices.push(new THREE.Vector3(s - n, s - n, s));
-    // RCOH.vertices.push(new THREE.Vector3(n, s - n, s));
-    // RCOH.vertices.push(new THREE.Vector3(0, s - n, s - n));
-    //
-    // // Top 4
-    // RCOH.vertices.push(new THREE.Vector3(n, s, n)); // v[20]
-    // RCOH.vertices.push(new THREE.Vector3(s - n, s, n));
-    // RCOH.vertices.push(new THREE.Vector3(s - n, s, s - n));
-    // RCOH.vertices.push(new THREE.Vector3(n, s, s - n));
+    vertices.push(new THREE.Vector3(n, 0, n)); // v[0]
+    vertices.push(new THREE.Vector3(s - n, 0, n));
+    vertices.push(new THREE.Vector3(s - n, 0, s - n));
+    vertices.push(new THREE.Vector3(n, 0, s - n));
 
-    // var constraints = [-1, 1, -1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2)];
+    // Bottom-middle 8-band
+    vertices.push(new THREE.Vector3(0, n, n)); // v[4]
+    vertices.push(new THREE.Vector3(n, n, 0));
+    vertices.push(new THREE.Vector3(s - n, n, 0));
+    vertices.push(new THREE.Vector3(s, n, n));
 
-    var points = [];
+    vertices.push(new THREE.Vector3(s, n, s - n)); // v[8]
+    vertices.push(new THREE.Vector3(s - n, n, s));
+    vertices.push(new THREE.Vector3(n, n, s));
+    vertices.push(new THREE.Vector3(0, n, s - n));
 
-    RCOH.vertices.forEach(function(point, i) {
-        points.push(i);
-    });
+    // Top-middle 8-band
+    vertices.push(new THREE.Vector3(0, s - n, n)); // v[12]
+    vertices.push(new THREE.Vector3(n, s - n, 0));
+    vertices.push(new THREE.Vector3(s - n, s - n, 0));
+    vertices.push(new THREE.Vector3(s, s - n, n));
 
-    faces = Combinatorics.permutation(points, 3).toArray();
-    faces.forEach(function(face) {
-        RCOH.faces.push(new THREE.Face3(face[0], face[1], face[2]));
-    });
+    vertices.push(new THREE.Vector3(s, s - n, s - n)); // v[16]
+    vertices.push(new THREE.Vector3(s - n, s - n, s));
+    vertices.push(new THREE.Vector3(n, s - n, s));
+    vertices.push(new THREE.Vector3(0, s - n, s - n));
+
+    // Top 4
+    vertices.push(new THREE.Vector3(n, s, n)); // v[20]
+    vertices.push(new THREE.Vector3(s - n, s, n));
+    vertices.push(new THREE.Vector3(s - n, s, s - n));
+    vertices.push(new THREE.Vector3(n, s, s - n));
+
+
+    var RCOH = new THREE.ConvexGeometry(vertices);
 
     RCOH.computeFaceNormals();
+
+    console.log("vertices: " + RCOH.vertices.length);
+    console.log("faces: " + RCOH.faces.length);
 
     return RCOH;
 }
@@ -78,7 +70,7 @@ function makeIsocahedron(s) {
         [math.phi / 2, 0.5, 0],
         [0.5, 0, math.phi / 2]
     ];
-    return makeArchimedianSolid(s, constraints);
+    return makeArchimedianSolid(s, constraints, false, true);
 }
 
 function makeTruncatedCube(s) {
@@ -100,13 +92,20 @@ function makeTruncatedOctahedron(s) {
 }
 
 function makeTruncatedDodecahedron(s) {
-    var constraints = [0, 1 / math.phi, 2 + math.phi, 1 / math.phi, math.phi, 2 * math.phi, math.phi, 2, math.phi + 1];
+    var constraints = [-1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2)];
 
     return makeArchimedianSolid(s, constraints, true);
 }
 
-function makeArchimedianSolid(s, constraints, permute = false) {
-    // var solid = new THREE.Geometry();
+function makeTruncatedTetrahedron(s) {
+
+    var constraints = [-1, 1, -1, 1, -3, 3];
+
+    return makeArchimedianSolid(s, constraints, true);
+}
+
+function makeArchimedianSolid(s, constraints, permute = false, convex = true) {
+    var solid = new THREE.Geometry();
 
     var points = [];
     var vertices = [];
@@ -126,14 +125,24 @@ function makeArchimedianSolid(s, constraints, permute = false) {
     }
 
     vertices.forEach(function(vertex, i) {
-        points.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+        if (convex) {
+          console.log(convex);
+            points.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+        } else {
+            solid.vertices.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
+            points.push(i);
+        }
     });
 
-
-    solid = new THREE.ConvexGeometry(points);
-
-    console.log(JSON.stringify(points));
-    console.log(JSON.stringify(solid.vertices));
+    if (convex) {
+        console.log(JSON.stringify(points));
+        var solid = new THREE.ConvexGeometry(points);
+    } else {
+        faces = Combinatorics.permutation(points, 3).toArray();
+        faces.forEach(function(face) {
+            solid.faces.push(new THREE.Face3(face[0], face[1], face[2]));
+        });
+    }
 
     console.log("vertices: " + solid.vertices.length);
     console.log("faces: " + solid.faces.length);
