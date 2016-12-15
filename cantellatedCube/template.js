@@ -153,7 +153,7 @@ var init = function() {
             color: 0x66CCEE
         });
 
-        // var cantellatedCubeGeometry = cantCube(20);
+        // var cantellatedCubeGeometry = cantCube(3);
         // var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
         // scene.add( cantellatedCube );
 
@@ -161,7 +161,7 @@ var init = function() {
         // var cube = new THREE.Mesh(cubeGeometry, Material);
         // scene.add(cube);
 
-        var isocahedronGeometry = makeIsocahedron(20);
+        var isocahedronGeometry = makeTruncatedCube(10);
         var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
         scene.add(isocahedron);
 
