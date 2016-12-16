@@ -111,21 +111,21 @@ var addLights = function(scene, origin) {
 
     scene.add(directionalLight1);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
-    // var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-    // directionalLight2.castShadow = true;
-    // directionalLight2.target = origin;
-    // directionalLight2.position.set( 80, 40, 60 );
-    //
-    // directionalLight2.shadeCameraNear = 100;
-    // directionalLight2.shadeCameraFar = -100;
-    // directionalLight2.shadeCameraLeft = -100;
-    // directionalLight2.shadeCameraRight = 100;
-    // directionalLight2.shadeCameraTop = 100;
-    // directionalLight2.shadeCameraBottom = -100;
-    //
-    // scene.add(directionalLight2);
+    var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight2.castShadow = true;
+    directionalLight2.target = origin;
+    directionalLight2.position.set( 80, 40, -60 );
+
+    directionalLight2.shadeCameraNear = 100;
+    directionalLight2.shadeCameraFar = -100;
+    directionalLight2.shadeCameraLeft = -100;
+    directionalLight2.shadeCameraRight = 100;
+    directionalLight2.shadeCameraTop = 100;
+    directionalLight2.shadeCameraBottom = -100;
+
+    scene.add(directionalLight2);
 }; // addLights()
 
 
@@ -168,10 +168,6 @@ var init = function() {
             guiControls.push(gui.add(visible, prop).listen());
         }
 
-        // var Material = new THREE.MeshPhongMaterial({
-        //     color: 0x66CCEE
-        // });
-
         var Material = new THREE.MeshPhongMaterial({
             color: 0x66CCEE,
             specular: 0x88888,
@@ -181,7 +177,7 @@ var init = function() {
         });
         Material.side = THREE.DoubleSide;
 
-        var cantellatedCubeGeometry = cantCube(3);
+        var cantellatedCubeGeometry = makeCantellatedCube(3);
         var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
         scene.add(cantellatedCube);
 

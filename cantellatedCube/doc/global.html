@@ -101,161 +101,7 @@
 
     
 
-    <h4 class="name" id="cantCube"><span class="type-signature"></span>cantCube<span class="signature">(s)</span><span class="type-signature"> &rarr; {THREE.Geometry}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Generates a cantellated cube (aka rhombicuboctahedron)
-that fits within a cube with side lengths 's'
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>s</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Size of the shape</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Returns a Cantellated Cube Geometry
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">THREE.Geometry</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="makeArchimedianSolid"><span class="type-signature"></span>makeArchimedianSolid<span class="signature">(s, constraints, convex)</span><span class="type-signature"> &rarr; {THREE.Geometry}</span></h4>
+    <h4 class="name" id="makeArchimedianSolid"><span class="type-signature"></span>makeArchimedianSolid<span class="signature">(s, constraints, convex, even)</span><span class="type-signature"> &rarr; {THREE.Geometry}</span></h4>
 
     
 
@@ -380,6 +226,35 @@ that fits within a cube with side lengths 's'
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>even</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">= false checks to see if there are even number of minus signs</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -445,6 +320,159 @@ that fits within a cube with side lengths 's'
         
 <div class="param-desc">
     Returns the shape
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">THREE.Geometry</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="makeCantellatedCube"><span class="type-signature"></span>makeCantellatedCube<span class="signature">(s)</span><span class="type-signature"> &rarr; {THREE.Geometry}</span></h4>
+
+    
+
+
+
+<div class="description">
+    makeCantellatedCube - Generates a cantellated cube
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Size of the shape</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a Cantellated Cube Geometry
 </div>
 
 
@@ -570,7 +598,7 @@ that fits within a cube with side lengths 's'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line25">line 25</a>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -723,7 +751,7 @@ that fits within a cube with side lengths 's'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line103">line 103</a>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -876,7 +904,7 @@ that fits within a cube with side lengths 's'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line39">line 39</a>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -1029,7 +1057,7 @@ that fits within a cube with side lengths 's'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line54">line 54</a>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -1182,7 +1210,7 @@ that fits within a cube with side lengths 's'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line73">line 73</a>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -1335,7 +1363,7 @@ that fits within a cube with side lengths 's'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line85">line 85</a>
+        <a href="cantellatedCube.js.html">cantellatedCube.js</a>, <a href="cantellatedCube.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -1399,13 +1427,13 @@ that fits within a cube with side lengths 's'
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cantCube">cantCube</a></li><li><a href="global.html#makeArchimedianSolid">makeArchimedianSolid</a></li><li><a href="global.html#makeCube">makeCube</a></li><li><a href="global.html#makeCuboctahedron">makeCuboctahedron</a></li><li><a href="global.html#makeIsocahedron">makeIsocahedron</a></li><li><a href="global.html#makeTruncatedCube">makeTruncatedCube</a></li><li><a href="global.html#makeTruncatedOctahedron">makeTruncatedOctahedron</a></li><li><a href="global.html#makeTruncatedTetrahedron">makeTruncatedTetrahedron</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#makeArchimedianSolid">makeArchimedianSolid</a></li><li><a href="global.html#makeCantellatedCube">makeCantellatedCube</a></li><li><a href="global.html#makeCube">makeCube</a></li><li><a href="global.html#makeCuboctahedron">makeCuboctahedron</a></li><li><a href="global.html#makeIsocahedron">makeIsocahedron</a></li><li><a href="global.html#makeTruncatedCube">makeTruncatedCube</a></li><li><a href="global.html#makeTruncatedOctahedron">makeTruncatedOctahedron</a></li><li><a href="global.html#makeTruncatedTetrahedron">makeTruncatedTetrahedron</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 16 2016 11:20:07 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 16 2016 11:32:56 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

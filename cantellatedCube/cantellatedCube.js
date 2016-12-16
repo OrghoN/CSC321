@@ -1,11 +1,10 @@
 /**
- * Generates a cantellated cube (aka rhombicuboctahedron)
- * that fits within a cube with side lengths 's'
+ * makeCantellatedCube - Generates a cantellated cube 
  *
  * @param  {Number} s Size of the shape
  * @return {THREE.Geometry}   Returns a Cantellated Cube Geometry
  */
-function cantCube(s) {
+function makeCantellatedCube(s) {
     var num = 1 + Math.SQRT2;
     var constraints = [
         [1, 1, num],
