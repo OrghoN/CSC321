@@ -116,7 +116,7 @@ var addLights = function(scene, origin) {
     var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
     directionalLight2.castShadow = true;
     directionalLight2.target = origin;
-    directionalLight2.position.set( 80, 40, -60 );
+    directionalLight2.position.set( -80, 40, -60 );
 
     directionalLight2.shadeCameraNear = 100;
     directionalLight2.shadeCameraFar = -100;
@@ -159,8 +159,6 @@ var init = function() {
             this.cuboctahedron = false;
         };
 
-        console.log(visible);
-
         var gui = new dat.GUI();
         var guiControls = [];
 
@@ -172,8 +170,8 @@ var init = function() {
             color: 0x66CCEE,
             specular: 0x88888,
             shininess: 90,
-            opacity: .6,
-            transparent: true
+            opacity: .8,
+            // transparent: true
         });
         Material.side = THREE.DoubleSide;
 
