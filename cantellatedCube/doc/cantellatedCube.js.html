@@ -34,60 +34,14 @@
  * @return {THREE.Geometry}   Returns a Cantellated Cube Geometry
  */
 function cantCube(s) {
-    // x/y/z offset distance from 'neighbor' vertex on a cube
-    // this explanation sucks, I know, but better to calculate
-    // this value once rather than dozens of times
+    var num = 1 + Math.SQRT2;
+    var constraints = [
+        [1, 1, num],
+        [1, num, 1],
+        [num, 1, 1]
+    ];
 
-    //var n = s/3;
-    var n = s / (2 + Math.sqrt(2));
-
-    // Final geometry.  RhombiCuboOctaHedron, 'Rico'
-    var vertices = [];
-    // Note clockwise, bottom-to-top organization
-    // Generate vertices
-    // Bottom 4
-    vertices.push(new THREE.Vector3(n, 0, n)); // v[0]
-    vertices.push(new THREE.Vector3(s - n, 0, n));
-    vertices.push(new THREE.Vector3(s - n, 0, s - n));
-    vertices.push(new THREE.Vector3(n, 0, s - n));
-
-    // Bottom-middle 8-band
-    vertices.push(new THREE.Vector3(0, n, n)); // v[4]
-    vertices.push(new THREE.Vector3(n, n, 0));
-    vertices.push(new THREE.Vector3(s - n, n, 0));
-    vertices.push(new THREE.Vector3(s, n, n));
-
-    vertices.push(new THREE.Vector3(s, n, s - n)); // v[8]
-    vertices.push(new THREE.Vector3(s - n, n, s));
-    vertices.push(new THREE.Vector3(n, n, s));
-    vertices.push(new THREE.Vector3(0, n, s - n));
-    c
-    // Top-middle 8-band
-    vertices.push(new THREE.Vector3(0, s - n, n)); // v[12]
-    vertices.push(new THREE.Vector3(n, s - n, 0));
-    vertices.push(new THREE.Vector3(s - n, s - n, 0));
-    vertices.push(new THREE.Vector3(s, s - n, n));
-
-    vertices.push(new THREE.Vector3(s, s - n, s - n)); // v[16]
-    vertices.push(new THREE.Vector3(s - n, s - n, s));
-    vertices.push(new THREE.Vector3(n, s - n, s));
-    vertices.push(new THREE.Vector3(0, s - n, s - n));
-
-    // Top 4
-    vertices.push(new THREE.Vector3(n, s, n)); // v[20]
-    vertices.push(new THREE.Vector3(s - n, s, n));
-    vertices.push(new THREE.Vector3(s - n, s, s - n));
-    vertices.push(new THREE.Vector3(n, s, s - n));
-
-
-    var RCOH = new THREE.ConvexGeometry(vertices);
-
-    RCOH.computeFaceNormals();
-
-    console.log("vertices: " + RCOH.vertices.length);
-    console.log("faces: " + RCOH.faces.length);
-
-    return RCOH;
+    return makeArchimedianSolid(s, constraints, true, false);
 }
 
 /**
@@ -116,7 +70,7 @@ function makeIsocahedron(s) {
         [math.phi / 2, 0.5, 0],
         [0.5, 0, math.phi / 2]
     ];
-    return makeArchimedianSolid(s, constraints, false, true);
+    return makeArchimedianSolid(s, constraints, false);
 }
 
 /**
@@ -147,22 +101,8 @@ function makeTruncatedCube(s) {
 function makeTruncatedOctahedron(s) {
     var constraints = [-1, 1, -2, 2, 0];
 
-    return makeArchimedianSolid(s, constraints, true);
+    return makeArchimedianSolid(s, constraints);
 }
-
-
-/**
- * makeTruncatedDodecahedron - Generates a Truncated dodecahedron
- *
- * @param  {Number} s Size of the shape
- * @return {THREE.Geometry}   Returns a Truncated dodecahedron Geometry
- */
-function makeTruncatedDodecahedron(s) {
-    var constraints = [-1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2)];
-
-    return makeArchimedianSolid(s, constraints, true);
-}
-
 
 /**
  * makeTruncatedTetrahedron - Generates a Truncated Tetrahedron
@@ -172,9 +112,13 @@ function makeTruncatedDodecahedron(s) {
  */
 function makeTruncatedTetrahedron(s) {
 
-    var constraints = [-1, 1, -1, 1, -3, 3];
+    var constraints = [
+        [1, 1, 3],
+        [1, 3, 1],
+        [3, 1, 1]
+    ];
 
-    return makeArchimedianSolid(s, constraints, true);
+    return makeArchimedianSolid(s, constraints, true, true);
 }
 
 
@@ -194,24 +138,25 @@ function makeCuboctahedron(s) {
     return makeArchimedianSolid(s, constraints);
 }
 
-
 /**
  * makeArchimedianSolid - Generates a Solid based on a series of constrains
  *
  * @param  {Number} s               Size of shape
  * @param  {Number[]} constraints     constraints that the vertices are generated from
- * @param  {boolean} permute = false Whether to do cartesianProduct of simple Permuataion
  * @param  {boolean} convex = true   Fallback to all permutation if convex shape doesn't work
  * @return {THREE.Geometry} Returns the shape
  */
-function makeArchimedianSolid(s, constraints, permute = false, convex = true) {
+function makeArchimedianSolid(s, constraints, convex = true, even = false) {
     var solid = new THREE.Geometry();
 
     var points = [];
     var vertices = [];
 
+    var negative = 0;
+    var push = true;
+
     var temp;
-    if (permute) {
+    if (!Array.isArray(constraints[0])) {
         vertices = Combinatorics.permutation(constraints, 3).toArray();
     } else {
         constraints.forEach(function(constraint) {
@@ -225,17 +170,29 @@ function makeArchimedianSolid(s, constraints, permute = false, convex = true) {
     }
 
     vertices.forEach(function(vertex, i) {
-        if (convex) {
-            console.log(convex);
+        if (even) {
+            push = false;
+            negative = 0;
+
+            vertex.forEach(function(num) {
+                if (num &lt; 0) {
+                    negative++;
+                }
+            });
+
+            if (negative % 2 === 0) {
+                push = true;
+            }
+        }
+        if (convex &amp;&amp; push) {
             points.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
-        } else {
+        } else if (push) {
             solid.vertices.push(new THREE.Vector3(s * vertex[0], s * vertex[1], s * vertex[2]));
             points.push(i);
         }
     });
 
     if (convex) {
-        console.log(JSON.stringify(points));
         var solid = new THREE.ConvexGeometry(points);
     } else {
         faces = Combinatorics.permutation(points, 3).toArray();
@@ -261,13 +218,13 @@ function makeArchimedianSolid(s, constraints, permute = false, convex = true) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cantCube">cantCube</a></li><li><a href="global.html#makeArchimedianSolid">makeArchimedianSolid</a></li><li><a href="global.html#makeCube">makeCube</a></li><li><a href="global.html#makeCuboctahedron">makeCuboctahedron</a></li><li><a href="global.html#makeIsocahedron">makeIsocahedron</a></li><li><a href="global.html#makeTruncatedCube">makeTruncatedCube</a></li><li><a href="global.html#makeTruncatedDodecahedron">makeTruncatedDodecahedron</a></li><li><a href="global.html#makeTruncatedOctahedron">makeTruncatedOctahedron</a></li><li><a href="global.html#makeTruncatedTetrahedron">makeTruncatedTetrahedron</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cantCube">cantCube</a></li><li><a href="global.html#makeArchimedianSolid">makeArchimedianSolid</a></li><li><a href="global.html#makeCube">makeCube</a></li><li><a href="global.html#makeCuboctahedron">makeCuboctahedron</a></li><li><a href="global.html#makeIsocahedron">makeIsocahedron</a></li><li><a href="global.html#makeTruncatedCube">makeTruncatedCube</a></li><li><a href="global.html#makeTruncatedOctahedron">makeTruncatedOctahedron</a></li><li><a href="global.html#makeTruncatedTetrahedron">makeTruncatedTetrahedron</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 16 2016 09:50:41 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Dec 16 2016 11:20:07 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -6,14 +6,14 @@
  * @return {THREE.Geometry}   Returns a Cantellated Cube Geometry
  */
 function cantCube(s) {
-    var num = 1 +  Math.SQRT2;
+    var num = 1 + Math.SQRT2;
     var constraints = [
         [1, 1, num],
         [1, num, 1],
         [num, 1, 1]
     ];
 
-    return makeArchimedianSolid(s, constraints, permute = false, convex = true, even = false);
+    return makeArchimedianSolid(s, constraints, true, false);
 }
 
 /**
@@ -42,7 +42,7 @@ function makeIsocahedron(s) {
         [math.phi / 2, 0.5, 0],
         [0.5, 0, math.phi / 2]
     ];
-    return makeArchimedianSolid(s, constraints, false, true);
+    return makeArchimedianSolid(s, constraints, false);
 }
 
 /**
@@ -73,22 +73,8 @@ function makeTruncatedCube(s) {
 function makeTruncatedOctahedron(s) {
     var constraints = [-1, 1, -2, 2, 0];
 
-    return makeArchimedianSolid(s, constraints, true);
+    return makeArchimedianSolid(s, constraints);
 }
-
-
-/**
- * makeTruncatedDodecahedron - Generates a Truncated dodecahedron
- *
- * @param  {Number} s Size of the shape
- * @return {THREE.Geometry}   Returns a Truncated dodecahedron Geometry
- */
-function makeTruncatedDodecahedron(s) {
-    var constraints = [-1, 1, (1 + Math.SQRT2), -(1 + Math.SQRT2)];
-
-    return makeArchimedianSolid(s, constraints, true);
-}
-
 
 /**
  * makeTruncatedTetrahedron - Generates a Truncated Tetrahedron
@@ -104,7 +90,7 @@ function makeTruncatedTetrahedron(s) {
         [3, 1, 1]
     ];
 
-    return makeArchimedianSolid(s, constraints, permute = false, convex = true, even = true);
+    return makeArchimedianSolid(s, constraints, true, true);
 }
 
 
@@ -124,17 +110,16 @@ function makeCuboctahedron(s) {
     return makeArchimedianSolid(s, constraints);
 }
 
-
 /**
  * makeArchimedianSolid - Generates a Solid based on a series of constrains
  *
  * @param  {Number} s               Size of shape
  * @param  {Number[]} constraints     constraints that the vertices are generated from
- * @param  {boolean} permute = false Whether to do cartesianProduct of simple Permuataion
  * @param  {boolean} convex = true   Fallback to all permutation if convex shape doesn't work
+ * @param  {boolean} even = false checks to see if there are even number of minus signs
  * @return {THREE.Geometry} Returns the shape
  */
-function makeArchimedianSolid(s, constraints, permute = false, convex = true, even = false) {
+function makeArchimedianSolid(s, constraints, convex = true, even = false) {
     var solid = new THREE.Geometry();
 
     var points = [];
@@ -144,7 +129,7 @@ function makeArchimedianSolid(s, constraints, permute = false, convex = true, ev
     var push = true;
 
     var temp;
-    if (permute) {
+    if (!Array.isArray(constraints[0])) {
         vertices = Combinatorics.permutation(constraints, 3).toArray();
     } else {
         constraints.forEach(function(constraint) {
@@ -181,7 +166,6 @@ function makeArchimedianSolid(s, constraints, permute = false, convex = true, ev
     });
 
     if (convex) {
-        console.log(JSON.stringify(points));
         var solid = new THREE.ConvexGeometry(points);
     } else {
         faces = Combinatorics.permutation(points, 3).toArray();

@@ -149,43 +149,68 @@ var init = function() {
         // add the output of the renderer to the html element
         document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
+        var visible = new function() {
+            this.cantellatedCube = true;
+            this.cube = false;
+            this.isocahedron = false;
+            this.truncatedCube = false;
+            this.truncatedOctahedron = false;
+            this.truncatedTetrahedron = false;
+            this.cuboctahedron = false;
+        };
+
+        console.log(visible);
+
+        var gui = new dat.GUI();
+        var guiControls = [];
+
+        for (var prop in visible) {
+            guiControls.push(gui.add(visible, prop).listen());
+        }
+
         var Material = new THREE.MeshPhongMaterial({
             color: 0x66CCEE
         });
 
         var cantellatedCubeGeometry = cantCube(3);
         var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
-        scene.add( cantellatedCube );
+        scene.add(cantellatedCube);
 
-        // var cubeGeometry = makeCube(10);
-        // var cube = new THREE.Mesh(cubeGeometry, Material);
-        // cube.position.x = 30;
-        // scene.add(cube);
-        //
-        // var isocahedronGeometry = makeIsocahedron(10);
-        // var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
-        // // isocahedron.position.x = -30;
-        // scene.add(isocahedron);
-        //
-        // var truncatedCubeGeometry = makeTruncatedCube(10);
-        // var truncatedCube = new THREE.Mesh(truncatedCubeGeometry, Material);
-        // // truncatedCube.position.y = 30;
-        // scene.add(truncatedCube);
+        var cubeGeometry = makeCube(10);
+        var cube = new THREE.Mesh(cubeGeometry, Material);
+        scene.add(cube);
 
-        // var truncatedOctahedronGeometry = makeTruncatedOctahedron(10);
-        // var truncatedOctahedron = new THREE.Mesh(truncatedOctahedronGeometry, Material);
-        // // truncatedOctahedron.position.y = -30;
-        // scene.add(truncatedOctahedron);
+        var isocahedronGeometry = makeIsocahedron(10);
+        var isocahedron = new THREE.Mesh(isocahedronGeometry, Material);
+        scene.add(isocahedron);
 
-        // var dodecahedronGeometry = makeTruncatedTetrahedron(3);
-        // var dodecahedron = new THREE.Mesh(dodecahedronGeometry, Material);
-        // scene.add(dodecahedron);
+        var truncatedCubeGeometry = makeTruncatedCube(6);
+        var truncatedCube = new THREE.Mesh(truncatedCubeGeometry, Material);
+        scene.add(truncatedCube);
 
+        var truncatedOctahedronGeometry = makeTruncatedOctahedron(3);
+        var truncatedOctahedron = new THREE.Mesh(truncatedOctahedronGeometry, Material);
+        scene.add(truncatedOctahedron);
+
+        var truncatedTetrahedronGeometry = makeTruncatedTetrahedron(3);
+        var truncatedTetrahedron = new THREE.Mesh(truncatedTetrahedronGeometry, Material);
+        scene.add(truncatedTetrahedron);
+
+        var cuboctahedronGeometry = makeCuboctahedron(7);
+        var cuboctahedron = new THREE.Mesh(cuboctahedronGeometry, Material);
+        scene.add(cuboctahedron);
 
         var render = function() {
             var delta = clock.getDelta();
             orbitControls.update(delta);
 
+            cantellatedCube.visible = visible.cantellatedCube;
+            cube.visible = visible.cube;
+            isocahedron.visible = visible.isocahedron;
+            truncatedCube.visible = visible.truncatedCube;
+            truncatedOctahedron.visible = visible.truncatedOctahedron;
+            truncatedTetrahedron.visible = visible.truncatedTetrahedron;
+            cuboctahedron.visible = visible.cuboctahedron;
 
             // render using requestAnimationFrame
             requestAnimationFrame(render);
