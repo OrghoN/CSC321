@@ -153,13 +153,9 @@ var init = function() {
             color: 0x66CCEE
         });
 
-        var cantellatedCubeGeometry = cantCube(10);
+        var cantellatedCubeGeometry = cantCube(3);
         var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
         scene.add( cantellatedCube );
-
-        // var cubeGeometry = makeCube(20);
-        // var cube = new THREE.Mesh(cubeGeometry, Material);
-        // scene.add(cube);
 
         // var cubeGeometry = makeCube(10);
         // var cube = new THREE.Mesh(cubeGeometry, Material);
