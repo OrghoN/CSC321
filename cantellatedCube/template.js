@@ -168,9 +168,18 @@ var init = function() {
             guiControls.push(gui.add(visible, prop).listen());
         }
 
+        // var Material = new THREE.MeshPhongMaterial({
+        //     color: 0x66CCEE
+        // });
+
         var Material = new THREE.MeshPhongMaterial({
-            color: 0x66CCEE
+            color: 0x66CCEE,
+            specular: 0x88888,
+            shininess: 90,
+            opacity: .6,
+            transparent: true
         });
+        Material.side = THREE.DoubleSide;
 
         var cantellatedCubeGeometry = cantCube(3);
         var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
