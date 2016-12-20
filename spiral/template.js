@@ -24,13 +24,13 @@ var setUp = function() {
     // create a render and set the size
     var renderer = new THREE.WebGLRenderer();
     // specify the color of the background for this image
-    renderer.setClearColor(new THREE.Color(0xDDFFCC));
+    renderer.setClearColor(new THREE.Color(0x000000));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMapEnabled = true;
 
     // specify the lengths of the 3 axes
     var axes = new THREE.AxisHelper(24);
-    scene.add(axes);
+    // scene.add(axes);
 
     // position and point the camera to the center of the scene
     camera.position.x = 20;
@@ -116,7 +116,7 @@ var addLights = function(scene, origin) {
     var directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
     directionalLight2.castShadow = true;
     directionalLight2.target = origin;
-    directionalLight2.position.set( -80, 40, -60 );
+    directionalLight2.position.set(-80, 40, -60);
 
     directionalLight2.shadeCameraNear = 100;
     directionalLight2.shadeCameraFar = -100;
@@ -145,30 +145,20 @@ var init = function() {
 
         // add the output of the renderer to the html element
         document.getElementById("WebGL-output").appendChild(renderer.domElement);
-        var material = new THREE.MeshPhongMaterial({
-            color: 0x66CCEE,
-            specular: 0x88888,
-            shininess: 90,
-            opacity: .8,
-            // transparent: true
+
+        var material = new THREE.LineBasicMaterial({
+            color: 0x66CCEE
         });
-        material.side = THREE.DoubleSide;
 
-        makeSpiral = makeSpiralSphere(20);
-        var points= [];
-
-        
-        var pSphere = new THREE.ParametricGeometry(makeSpiral, 30, 30);
-      	var pSphereMesh =  new THREE.Mesh(pSphere, material);
-      	scene.add(pSphereMesh);
-
-        // var cantellatedCubeGeometry = makeCantellatedCube(3);
-        // var cantellatedCube = new THREE.Mesh(cantellatedCubeGeometry, Material);
-        // scene.add(cantellatedCube);
+        var sphere = makeSpiralSphere(20, 20);
+        var sphereSpiral = new THREE.Line(sphere, material);
+        scene.add(sphereSpiral);
 
         var render = function() {
             var delta = clock.getDelta();
             orbitControls.update(delta);
+
+            sphereSpiral.rotation.z -= 0.05;
 
             // render using requestAnimationFrame
             requestAnimationFrame(render);
