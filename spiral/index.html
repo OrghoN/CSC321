@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<!-- CSC321 Computer Graphics          -->
+<!-- Cornell College                   -->
+<!-- 13 December 2016                  -->
+
+<html>
+
+<head>
+    <title>Experiments</title>
+    <script type="text/javascript" src="three.min.js"></script>
+    <!-- <script type="text/javascript" src="https://threejs.org/examples/js/geometries/ConvexGeometry.js"></script> -->
+    <script type="text/javascript" src="OrbitControls.js"></script>
+    <!-- <script type="text/javascript" src="combinatorics.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.8.0/math.min.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.js"></script>
+    <style>
+        body {
+            /* set margin to 0 and overflow to hidden, to go fullscreen */
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Div which will hold the Output -->
+<div id="WebGL-output">
+</div>
+
+<!-- Javascript code that runs our Three.js examples -->
+<script type="text/javascript" src="spiral.js"></script>
+<script type="text/javascript" src="template.js"></script>
+
+<script>
+    window.onload = init;
+</script>
+</body>
+</html>
