@@ -150,15 +150,24 @@ var init = function() {
             color: 0x66CCEE
         });
 
-        var sphere = makeSpiralSphere(20, 20);
-        var sphereSpiral = new THREE.Line(sphere, material);
-        scene.add(sphereSpiral);
+        var spheres = [];
+        for(var i=0; i< 5; i++){
+          spheres.push(new THREE.Line(makeSpiralSphere(5*i, 20), material));
+          scene.add(spheres[i]);
+        }
 
         var render = function() {
             var delta = clock.getDelta();
             orbitControls.update(delta);
 
-            sphereSpiral.rotation.z -= 0.05;
+            spheres.forEach(function(sphere,i){
+              if(i%2===0){
+                sphere.rotation.z -= 0.05;
+              }
+              else{
+                sphere.rotation.z += 0.05;
+              }
+            });
 
             // render using requestAnimationFrame
             requestAnimationFrame(render);
