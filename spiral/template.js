@@ -165,7 +165,7 @@ var init = function() {
                 sphere.rotation.z -= 0.05;
               }
               else{
-                sphere.rotation.z += 0.05;
+                sphere.rotation.z += 0.1;
               }
             });
 
